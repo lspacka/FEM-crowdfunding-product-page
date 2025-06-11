@@ -1,4 +1,5 @@
 :root {
+  --button-height:      3.125rem;
   --lighter-gray:       hsl(0, 0%, 98%);
   --light-gray:         hsl(0, 0%, 95%);
   --dark-gray:          hsl(0, 0%, 48%);
@@ -19,34 +20,48 @@
 header {
   display: flex;
   justify-content: space-between;
+  padding: 1.9rem 1.2rem 0;   /* clamp */
 }
 
 h1 {
   font-size: 1.19rem;
+  padding: 1.1rem 0 1rem;
+}
+
+h2 {
+  font-size: 1rem;
+}
+
+h2, h3, p {
+  padding-bottom: 1.5rem;
 }
 
 p {
-  font-size: 0.87rem;
+  font-size: 0.8rem;
+  line-height: 1.7;
 }
 
 button {
   background-color: var(--moderate-cyan);
   border: none;
   border-radius: 50px;
-  min-height: 45px;
+  /* min-height: 45px; */
   color: white;
   font-weight: 500;
-  padding: 0 2rem;
+  padding: 0 2.3rem;
+  align-self: flex-start;
+  height: var(--button-height);
 }
 
 .hero {
   background: url(./images/image-hero-mobile.jpg);
-  /* background-position: 0; */
   background-size: contain;
-  background-repeat:round;
+  background-repeat: round;
   aspect-ratio: 8 / 7;
-  /* aspect-ratio: 1; */
-  /* height: fit-content; */
+}
+
+.header-svg img {
+  inline-size: 87%;     /* clamp */
 }
 
 .links {
@@ -62,17 +77,23 @@ button {
 }
 
 .content {
-  width: 80%;
+  width: 87%;
   max-width: 1200px;
+  /* display: grid;
+  gap: 1.5rem; */
+  transform: translateY(-3.2rem);
+}
+
+.content,
+.rewards {
   display: grid;
   gap: 1.5rem;
-  transform: translateY(-3em);
 }
 
 .content > *,
 .reward {
   background-color: white;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem 1.5rem;
   border: 2px solid var(--light-gray);
   border-radius: 7px;
 }
@@ -80,17 +101,106 @@ button {
 .intro {
   text-align: center;
   border-top: none;
+  padding-top: 0;
+}
+
+/* .intro > * {
+  transform: translateY(-3.35rem);
+} */
+
+.mastercraft-logo {
+  margin-top: -1.8rem;
+}
+
+.intro-buttons {
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 0.5rem;
+}
+
+.intro-buttons img {
+  /* inline-size: 83%;     */
+  height: var(--button-height);
+}
+
+.intro-buttons p {
+  display: none;
+}
+
+.back-this-project {
+  font-size: 0.78rem;
 }
 
 .stats {
+  /* display: flex;
+  flex-direction: column;
+  place-items: center; */
   text-align: center;
 }
 
-.rewards {
-  display: grid;
-  gap: 1.5rem;
+.stats p {
+  padding-bottom: 0.1rem;
+}
+
+.numbers {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+
+.number {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.stat-number,
+.reward-number {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  border-radius: 50px;
+  background-color: rebeccapurple;
 }
 
 .about {
-  padding-bottom: 1rem;
+  padding-bottom: 0;
+}
+
+.about p:nth-of-type(2) {
+  padding-bottom: 0.5rem;
+}
+
+.rewards-left {
+  display: flex;
+  gap: 0.5rem
+}
+
+.reward {
+  padding: 1.5rem 1.1rem;
+}
+
+.reward-type {
+  padding-bottom: 0.1rem;
+  font-weight: 700;
+}
+
+.pledge-minimum {
+  color: var(--moderate-cyan);
+  font-weight: 500;
+}
+
+.reward-description {
+  font-size: 0.73rem;
+}
+
+.reward-left {
+  align-self: center;
+}
+
+.select-reward {
+  padding: 0 2rem;
 }
