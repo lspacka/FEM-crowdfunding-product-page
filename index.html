@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Commissioner:wght@100..900&family=Epilogue:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <title>Frontend Mentor | Crowdfunding product page</title>
   </head>
   <body>
@@ -14,12 +16,15 @@
         <section class="hero">
           <header>
             <div class="header-svg">
-              <img src="./images/logo.svg" alt="header logo">
+              <img src="./images/logo.svg" alt="crowdfund logo">
             </div>
             <div class="links">
-              <a href="" class="header-link">About</a>
-              <a href="" class="header-link">Discover</a>
-              <a href="" class="header-link">Get Started</a>
+              <a href="" class="link">About</a>
+              <a href="" class="link">Discover</a>
+              <a href="" class="link">Get Started</a>
+            </div>
+            <div class="burger-menu">
+              <img src="./images/icon-hamburger.svg" alt="burger menu icon">
             </div>
           </header>
         </section>
@@ -31,7 +36,9 @@
                   <img src="./images/logo-mastercraft.svg" alt="mastercraft logo">
                 </div>
                 <h1>Mastercraft Bamboo Monitor Riser</h1>
-                <p>A beautifully</p>
+                <p>
+                  A beautiful & handcrafted monitor stand to reduce neck and eye strain.
+                </p>
               </div>
               <div class="intro-buttons">
                 <button>Back this project</button>
@@ -56,9 +63,22 @@
                   <p>days left</p>
                 </div>
               </div>
+              <div class="progress-bar"></div>
             </div>
-            <div class="progress-bar"></div>
-            <div class="about">
+            <!-- <div class="about">
+              <h2>About this project</h2>
+              <p>
+                The Mastercraft Bamboo Monitor Riser is a sturdy and stylish platform that elevates your screen 
+                to a more comfortable viewing height. Placing your monitor at eye level has the potential to improve 
+                your posture and make you more comfortable while at work, helping you stay focused on the task at hand.
+              </p>
+              <p>
+                Featuring artisan craftsmanship, the simplicity of design creates extra desk space below your computer 
+                to allow notepads, pens, and USB sticks to be stored under the stand.
+              </p>
+            </div> -->
+            <div class="rewards">
+              <div class="about">
               <h2>About this project</h2>
               <p>
                 The Mastercraft Bamboo Monitor Riser is a sturdy and stylish platform that elevates your screen 
@@ -70,7 +90,6 @@
                 to allow notepads, pens, and USB sticks to be stored under the stand.
               </p>
             </div>
-            <div class="rewards">
               <div class="reward" id="reward-1">
                 <div class="reward-heading">
                   <p class="reward-type">Bamboo Stand</p>
@@ -82,8 +101,8 @@
                 </p>
                 <div class="reward-bottom">
                   <div class="rewards-left" id="rewards-left-1">
-                    <p>101 left</p>
-                    <p>Select Reward</p>
+                    <p>101</p>
+                    <p>left</p>
                   </div>
                   <button class="select-reward" id="select-reward-button-1">Select Reward</button>
                 </div>
@@ -99,8 +118,8 @@
                 </p>
                 <div class="reward-bottom">
                   <div class="rewards-left" id="rewards-left-1">
-                    <p>64 left</p>
-                    <p>Select Reward</p>
+                    <p>64</p>
+                    <p>left</p>
                   </div>
                   <button class="select-reward" id="select-reward-button-1">Select Reward</button>
                 </div>
@@ -116,10 +135,10 @@
                 </p>
                 <div class="reward-bottom">
                   <div class="rewards-left" id="rewards-left-1">
-                    <p>0 left</p>
-                    <p>Out of Stock</p>
+                    <p>0</p>
+                    <p>left</p>
                   </div>
-                  <button class="select-reward" id="select-reward-button-1">Select Reward</button>
+                  <button class="select-reward disabled" id="select-reward-button-1">Out of Stock</button>
                 </div>
               </div>
             </div>
