@@ -2,9 +2,12 @@
   --button-height:      3.125rem;
   --lighter-gray:       hsl(0, 0%, 98%);
   --light-gray:         hsl(0, 0%, 95%);
+  --lightish-gray:      hsl(0, 0%, 73%);
   --dark-gray:          hsl(0, 0%, 48%);
+  --light-cyan:         hsl(170, 28%, 76%);
   --moderate-cyan:      hsl(176, 50%, 47%);
   --dark-cyan:          hsl(176, 72%, 28%);
+  --dark-wat:           hsl(0, 0%, 3%);
 }
 
 *,
@@ -24,12 +27,12 @@ header {
 }
 
 h1 {
-  font-size: 1.19rem;
+  font-size: 1.19rem;         /* clamp */
   padding: 1.1rem 0 1rem;
 }
 
 h2 {
-  font-size: 1rem;
+  font-size: 1rem;            /* clamp */
 }
 
 h2, h3, p {
@@ -37,8 +40,10 @@ h2, h3, p {
 }
 
 p {
-  font-size: 0.8rem;
+  font-size: 0.77rem;          /* clamp */
   line-height: 1.7;
+  color: var(--dark-gray);
+  font-weight: 500;
 }
 
 button {
@@ -46,11 +51,20 @@ button {
   border: none;
   border-radius: 50px;
   /* min-height: 45px; */
+  font-size: 0.76rem; 
   color: white;
   font-weight: 500;
   padding: 0 2.3rem;
   align-self: flex-start;
   height: var(--button-height);
+}
+
+button:not(.back-this-project) {
+  height: 2.8rem;
+}
+
+button, .bookmark {
+  transition: .2s ease-in-out;
 }
 
 .hero {
@@ -69,6 +83,44 @@ button {
   flex-direction: column;
   visibility: hidden;
 }
+
+.burger-menu {
+  height: fit-content;
+}
+
+.burger-menu:hover,
+.bookmark img,
+button:not(.button-disabled):hover {
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--dark-cyan);
+}
+
+/* .bookmark {
+  filter: 
+    brightness(0) 
+    saturate(100%) 
+    invert(16%) 
+    sepia(0%) 
+    saturate(2462%) 
+    hue-rotate(277deg) 
+    brightness(98%) 
+    contrast(91%);
+} */
+
+/* .bookmark:hover {
+  filter:
+    brightness(0) 
+    saturate(100%) 
+    invert(44%) 
+    sepia(0%) 
+    saturate(423%) 
+    hue-rotate(33deg) 
+    brightness(98%) 
+    contrast(96%);
+} */
 
 .content-container {
   display: flex;
@@ -93,7 +145,7 @@ button {
 .content > *,
 .reward {
   background-color: white;
-  padding: 1.5rem 1.5rem;
+  padding: 1.4rem;
   border: 2px solid var(--light-gray);
   border-radius: 7px;
 }
@@ -127,9 +179,9 @@ button {
   display: none;
 }
 
-.back-this-project {
-  font-size: 0.78rem;
-}
+/* .back-this-project {
+  font-size: 0.78rem;     
+} */
 
 .stats {
   /* display: flex;
@@ -155,8 +207,9 @@ button {
 
 .stat-number,
 .reward-number {
-  font-size: 1.8rem;
+  font-size: 1.8rem;      /* clamp */
   font-weight: 700;
+  color: black;
 }
 
 .progress-bar {
@@ -167,7 +220,7 @@ button {
 }
 
 .about {
-  padding-bottom: 0;
+  padding: 1rem 0 0;
 }
 
 .about p:nth-of-type(2) {
@@ -176,31 +229,66 @@ button {
 
 .rewards-left {
   display: flex;
-  gap: 0.5rem
+  gap: 0.5rem;
+  align-items: center;
 }
 
 .reward {
-  padding: 1.5rem 1.1rem;
+  padding: 1.1rem;
 }
 
 .reward-type {
   padding-bottom: 0.1rem;
   font-weight: 700;
+  color: black;
 }
 
 .pledge-minimum {
   color: var(--moderate-cyan);
-  font-weight: 500;
+  font-weight: 700;
+  padding-bottom: 1.2rem;
 }
 
 .reward-description {
-  font-size: 0.73rem;
+  font-size: 0.73rem;     /* clamp */
+  padding-bottom: 1rem;
 }
 
+.reward-number {
+  padding-bottom: 1rem;
+}
+
+/* .reward-left-div {
+  display: flex;
+  align-content: center;
+} */
+
 .reward-left {
-  align-self: center;
+  transform: translateY(10%);
 }
 
 .select-reward {
-  padding: 0 2rem;
+  padding: 0 1.7rem;
+}
+
+.reward-disabled {
+  border-color: var(--lighter-gray);
+}
+
+.reward-disabled .reward-type,
+.reward-disabled .reward-number {
+  color: var(--dark-gray);
+}
+
+.reward-disabled .pledge-minimum {
+  color: var(--light-cyan);
+}
+
+.reward-disabled .reward-description,
+.reward-disabled .reward-left {
+  color: var(--lightish-gray);
+}
+
+.button-disabled {
+  background-color: var(--lightish-gray);
 }

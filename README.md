@@ -26,7 +26,7 @@ Users should be able to:
 
 - Semantic HTML5 markup
 - CSS
-- TypeScript
+- JavaScript
 
 ## Author
 
