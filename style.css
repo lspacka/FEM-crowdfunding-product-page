@@ -1,7 +1,13 @@
+/* 
+  TODO: 
+    - fix inputs
+*/
+
 :root {
   --button-height:      3.125rem;
   --lighter-gray:       hsl(0, 0%, 98%);
-  --light-gray:         hsl(0, 0%, 95%);
+  --light-gray:         hsl(0, 0%, 95%);        /* disabled border*/
+  --border-gray:        hsl(0, 0%, 90%);    
   --lightish-gray:      hsl(0, 0%, 73%);
   --dark-gray:          hsl(0, 0%, 48%);
   --light-cyan:         hsl(170, 28%, 76%);
@@ -57,6 +63,8 @@ button {
   padding: 0 2.3rem;
   align-self: flex-start;
   height: var(--button-height);
+  /* display: inline-block;    */
+  flex: 0 0 auto;
 }
 
 button:not(.back-this-project) {
@@ -143,7 +151,9 @@ button:hover {
 }
 
 .content > *,
-.reward {
+.reward,
+.modal,
+.modal-pledge {
   background-color: white;
   padding: 1.4rem;
   border: 2px solid var(--light-gray);
@@ -235,6 +245,7 @@ button:hover {
 
 .reward {
   padding: 1.1rem;
+  border: 2px solid var(--border-gray);
 }
 
 .reward-type {
@@ -272,7 +283,7 @@ button:hover {
 }
 
 .reward-disabled {
-  border-color: var(--lighter-gray);
+  border: 2px solid var(--light-gray);
 }
 
 .reward-disabled .reward-type,
@@ -291,4 +302,95 @@ button:hover {
 
 .button-disabled {
   background-color: var(--lightish-gray);
+}
+
+.modal {
+  border: none;
+  padding: 1.5rem 1.5rem;
+  width: 87%;
+  max-width: 1200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.modal h1,
+.pledge-header p {
+  padding: 0;
+}
+
+.modal p:not(.reward-number, .reward-left){
+  font-size: 0.74rem;
+}
+
+.modal-completed {
+  text-align: center;
+}
+
+.modal-completed button {
+  padding: 0 1.8rem;
+}
+
+.check-icon {
+  padding-bottom: 1.5rem;
+}
+
+.modal-pledges {
+  display: grid;
+  gap: 1.3rem;
+}
+
+.modal-pledges-header {
+  display: flex;
+  justify-content: space-between;
+  /* padding-bottom: 1.5rem; */
+}
+
+.close-modal {
+  align-self: self-end;
+}
+
+.pledge-header {
+  display: flex;
+}
+
+.modal-pledges > p {
+  padding-bottom: 0;
+}
+
+.no-reward button {
+  margin-left: auto;
+}
+
+.pledge-bottom {
+  border-top: 2px solid var(--light-gray);
+  text-align: center;
+}
+
+.enter-pledge {
+  /* display: grid;
+  grid-template-columns: 1fr 1.4fr; */
+  display: flex;
+  gap: 0.7rem;
+}
+
+.pledge-amount {
+  border-radius: 50px;
+  border: 2px solid var(--light-gray);
+  outline: none;
+}
+
+.confirm-pledge {
+  padding: 0 1.5rem;
+}
+
+.pledge-header {
+  display: flex;
+  gap: 0.7rem;
+  padding-bottom: 1.5rem;
+}
+
+.pledge-left {
+  display: flex;
+  gap: 0.7rem;
 }
