@@ -50,15 +50,17 @@
             </div>
             <div class="stats">
               <div class="numbers">
-                <div class="number">
+                <div class="number number-1">
                   <p class="stat-number">$89,914</p>
                   <p class="stat">of $100,000 backed</p>
                 </div>
-                <div class="number">
+                <div class="bottom-border"></div>
+                <div class="number number-2">
                   <p class="stat-number">5,007</p>
                   <p class="stat">total backers</p>
                 </div>
-                <div class="number">
+                <div class="bottom-border"></div>
+                <div class="number number-3">
                   <p class="stat-number">56</p>
                   <p class="stat">days left</p>
                 </div>
@@ -123,7 +125,7 @@
                 </p>
                 <div class="reward-bottom">
                   <div class="rewards-left" id="rewards-left-1">
-                    <p class="reward-number">64</p>
+                    <p class="reward-number">0</p>
                     <!-- <div class="reward-left-div"> -->
                       <p class="reward-left">left</p>
                     <!-- </div> -->
@@ -148,14 +150,14 @@
       </p>
       <button>Got it!</button>
      </dialog>
-     <dialog class="modal modal-pledges">
+     <dialog class="modal modal-pledges" open>
       <div class="modal-pledges-header">
-        <h1>Back this project</h1>
+        <h2>Back this project</h2>
         <div class="close-modal">
           <img src="./images/icon-close-modal.svg" alt="close modal icon">
         </div>
       </div>
-      <p>
+      <p class="modal-pledges-heading">
         Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?
       </p>
       <div class="modal-pledge no-reward">
@@ -171,11 +173,6 @@
             you will be signed up to receive product updates via email.
           </p>
         </div>
-        <!-- <div class="pledge-bottom">
-          <div class="enter-pledge">
-            <button class="confirm-pledge">Continue</button>
-          </div>
-        </div> -->
       </div>
       <div class="pledge-bottom">
         <div class="enter-pledge">
@@ -202,13 +199,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="pledge-bottom">
-          <p>Enter your pledge</p>
-          <div class="enter-pledge">
-            <input type="text" class="pledge-amount" min="25">
-            <button class="confirm-pledge">Continue</button>
-          </div>
-        </div> -->
       </div>
       <div class="pledge-bottom">
         <p>Enter your pledge</p>
@@ -237,13 +227,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="pledge-bottom">
-          <p>Enter your pledge</p>
-          <div class="enter-pledge">
-            <input type="text" class="pledge-amount" min="75">
-            <button class="confirm-pledge">Continue</button>
-          </div>
-        </div> -->
       </div>
       <div class="pledge-bottom">
         <p>Enter your pledge</p>
@@ -252,10 +235,10 @@
           <button class="confirm-pledge">Continue</button>
         </div>
       </div>
-      <div class="modal-pledge">
+      <div class="modal-pledge modal-pledge-disabled">
         <div class="pledge-info">
           <div class="pledge-header">
-            <input type="radio" class="select-pledge">
+            <input type="radio" class="select-pledge" disabled>
             <div class="pledge-heading">
               <p class="reward-type">Mahogany Special Edition</p>
               <p class="pledge-minimum">Pledge $200 or more</p>
@@ -272,21 +255,14 @@
             </div>
           </div>
         </div>
-        <!-- <div class="pledge-bottom">
-          <p>Enter your pledge</p>
-          <div class="enter-pledge">
-            <input type="text" class="pledge-amount" min="200">
-            <button class="confirm-pledge">Continue</button>
-          </div>
-        </div> -->
       </div>
-      <div class="pledge-bottom">
+      <!-- <div class="pledge-bottom">
         <p>Enter your pledge</p>
         <div class="enter-pledge">
           <input type="text" class="pledge-amount" min="200">
           <button class="confirm-pledge">Continue</button>
         </div>
-      </div>
+      </div> -->
      </dialog>
      <div class="overlay"></div>
   </body>

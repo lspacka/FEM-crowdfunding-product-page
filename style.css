@@ -64,7 +64,7 @@ button {
   border: none;
   border-radius: 50px;
   /* min-height: 45px; */
-  min-width: 132.95px;
+  /* min-width: 132.95px; */
   font-size: 0.76rem; 
   color: white;
   font-weight: 500;
@@ -77,6 +77,10 @@ button {
 
 button:not(.back-this-project) {
   height: 2.8rem;
+}
+
+button:not(.confirm-pledge) {
+  min-width: 132.95px;
 }
 
 button, .bookmark {
@@ -105,7 +109,7 @@ button, .bookmark {
 }
 
 .burger-menu:hover,
-.bookmark img,
+.bookmark,
 .close-modal,
 button:not(.button-disabled):hover {
   cursor: pointer;
@@ -113,6 +117,10 @@ button:not(.button-disabled):hover {
 
 button:hover {
   background-color: var(--dark-cyan);
+}
+
+.bookmark p {
+  display: none;
 }
 
 /* .bookmark {
@@ -165,7 +173,7 @@ button:hover {
 .modal-pledge {
   background-color: white;
   padding: clamp(1.4rem, 5vw, 2.4rem);
-  border: 2px solid var(--light-gray);
+  border: 1.5px solid var(--light-gray);
   border-radius: 7px;
 }
 
@@ -194,10 +202,6 @@ button:hover {
   height: var(--button-height);
 }
 
-.intro-buttons p {
-  display: none;
-}
-
 /* .back-this-project {
   font-size: 0.78rem;     
 } */
@@ -217,11 +221,12 @@ button:hover {
   display: flex;
   flex-direction: column;
   place-items: center;
+  gap: .5rem;
 }
 
 .number {
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--light-gray);
+  /* padding-bottom: 1rem; */
+  height: fit-content;
 }
 
 .stat-number,
@@ -229,6 +234,15 @@ button:hover {
   font-size: 1.8rem;      /* clamp */
   font-weight: 700;
   color: black;
+  height: auto;
+  /* line-height: 1; */
+}
+
+
+.bottom-border {
+  width: 77px;
+  border: 1px solid var(--light-gray);
+  margin-top: .7rem;
 }
 
 .progress-bar {
@@ -236,6 +250,7 @@ button:hover {
   height: 12px;
   border-radius: 50px;
   background-color: rebeccapurple;
+  margin-top: 2rem;
 }
 
 .about {
@@ -276,6 +291,7 @@ button:hover {
 
 .reward-number {
   padding-bottom: 1rem;
+  font-size: clamp(1.1rem, 5vw, 1.8rem);
 }
 
 /* .reward-left-div {
@@ -284,7 +300,9 @@ button:hover {
 } */
 
 .reward-left {
-  transform: translateY(10%);
+  transform: translateY(8%);
+  font-size: clamp(0.9rem, 4vw, 1rem);
+  /* font-size: 0.9rem; */
 }
 
 .select-reward {
@@ -313,23 +331,38 @@ button:hover {
   background-color: var(--lightish-gray);
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: hsl(0, 0%, 3%, 60%);
+}
+
 .modal {
   border: none;
   padding: 1.5rem 1.5rem;
   width: 87%;
   max-width: 1200px;
+  margin: 35% auto;
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
 }
 
-.modal h1,
+.modal, .overlay {
+  display: none;
+}
+
+.modal h2,
 .pledge-header p {
   padding: 0;
 }
 
 .modal p:not(.reward-number, .reward-left){         /* ? */
-  font-size: 0.74rem;
+  font-size: 0.73rem;
 }
 
 .modal-completed {
@@ -356,28 +389,58 @@ button:hover {
   /* padding-bottom: 1.5rem; */
 }
 
+.modal-pledges-heading {
+  padding: 1.5rem 0 0;
+}
+
 .close-modal {
   align-self: self-end;
   height: fit-content;
+  line-height: 0;
 }
 
 .pledge-header {
   display: flex;
 }
 
-.modal-pledges > p {
+/* .modal-pledges > p {
   padding-bottom: 0;
+} */
+
+.modal-pledge {
+  margin-top: 1.5rem;
+  padding-bottom: 0;
+  border: 1.7px solid var(--border-gray);
 }
 
-.no-reward button {
-  margin-left: auto;
+.modal-pledge-disabled {
+  border-color: var(--light-gray);
+}
+
+.modal-pledge-disabled p {
+  color: var(--border-gray);
+}
+
+.modal-pledge-disabled .reward-type,
+.modal-pledge-disabled .reward-number {
+  color: var(--dark-gray);
+}
+
+.modal-pledge-disabled .pledge-minimum {
+  color: var(--light-cyan);
+}
+
+.no-reward {
+  padding-bottom: 0;
 }
 
 .pledge-bottom {
   /* border-top: 2px solid var(--light-gray); */
-  padding: 0 1.4rem 1.4rem;
+  /* padding: 0 1.4rem 1.4rem; */
+  padding: 1.5rem 1.4rem 1.4rem;
   border-radius: 7px;
   text-align: center;
+  /* margin-bottom: 1.5rem; */
 }
 
 .no-reward-button {
@@ -393,7 +456,7 @@ button:hover {
 
 .pledge-amount {
   border-radius: 50px;
-  border: 2px solid var(--light-gray);
+  border: 2.2px solid var(--light-gray);
   outline: none;
 }
 
@@ -423,6 +486,20 @@ button:hover {
     height: 25vh;
   }
 
+  .bookmark {
+    display: flex;
+    background-color: var(--light-gray);
+    border-radius: 50px;
+  }
+
+  .bookmark p{
+    display: block;
+    padding: 0 1.3rem 0 0.7rem;
+    height: fit-content;
+    align-self: center;
+    font-weight: 700;
+  }
+
   /* .content {
     width: 70%;
     max-width: 1200px;
@@ -432,12 +509,27 @@ button:hover {
     /* flex-direction: row;
     justify-content: space-between; */
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    /* grid-template-columns: repeat(5, 1fr); */
+    grid-template-columns: .8fr .1fr 1fr .1fr 1.2fr;
   }
 
-  .number:nth-of-type(1) {
+  .number {
     /* text-align: left; */
     justify-self: left;
+  }
+
+  .number-2, .number-3 {
+    padding-left: 1.5rem;
+  }
+
+  /* .number-1, .number-2 {
+    border-right: 1px solid var(--light-gray);
+  } */
+
+  .bottom-border {
+    /* display: none; */
+    width: 0;
+    height: 50px;
   }
 
   .reward-bottom {
