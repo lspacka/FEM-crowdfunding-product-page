@@ -37,8 +37,8 @@
 header {
   display: flex;
   justify-content: space-between;
-  padding: clamp(1.9rem, 5vw, 2.5rem) clamp(1.2rem, 50vw, 11rem) 0;
-  /* padding: 1.9rem 1.2rem 0; */
+  /* padding: clamp(1.9rem, 5vw, 3rem) clamp(1.2rem, 11vw, 11rem) 0; */
+  padding: 1.9rem 1.2rem 0;
 }
 
 h1 {
@@ -70,7 +70,7 @@ button {
   font-size: 0.76rem; 
   color: white;
   font-weight: 500;
-  padding: 0 2.3rem;
+  /* padding: 0 1rem; */
   align-self: flex-start;
   height: var(--button-height);
   /* display: inline-block;    */
@@ -78,14 +78,22 @@ button {
 }
 
 button:not(.back-this-project) {
-  height: 2.8rem;
+  /* height: 2.8rem; */
+  height: 3rem;
 }
 
-button:not(.confirm-pledge):not(.modal-completed-button) {
+/* button:not(.confirm-pledge):not(.modal-completed-button):not(.back-this-project) {
   min-width: 132.95px;
+  width: clamp(132.95px, 5vw, 180px);
+} */
+
+.select-reward {
+  min-width: 132.95px;
+  width: clamp(132.95px, 40vw, 170px);
 }
 
-button, .bookmark {
+button, 
+.bookmark {
   transition: .2s ease-in-out;
 }
 
@@ -97,7 +105,7 @@ button, .bookmark {
 }
 
 .header-svg img {
-  inline-size: 87%;     /* clamp */
+  inline-size: 87%;   
 }
 
 .links {
@@ -117,7 +125,7 @@ button:not(.button-disabled):hover {
   cursor: pointer;
 }
 
-button:hover {
+button:not(.button-disabled):hover {
   background-color: var(--dark-cyan);
 }
 
@@ -184,6 +192,7 @@ button:hover {
   text-align: center;
   border-top: none;
   padding-top: 0;
+  padding-bottom: 2rem;
 }
 
 /* .intro > * {
@@ -206,9 +215,10 @@ button:hover {
   height: var(--button-height);
 }
 
-/* .back-this-project {
-  font-size: 0.78rem;     
-} */
+.back-this-project {
+  min-width: 170px;    
+  width: clamp(170px, 50vw, 200px);
+}
 
 .stats {
   /* display: flex;
@@ -321,9 +331,10 @@ button:hover {
   /* font-size: 0.9rem; */
 }
 
-.select-reward {
-  padding: 0 1.7rem;
-}
+/* padding: 0 1.7rem; */
+/* .select-reward {
+  width: clamp(132.95px, 50vw, 200px);
+} */
 
 .reward-disabled {
   border: 2px solid var(--light-gray);
@@ -537,6 +548,10 @@ input[type=number] {
     height: 25vh;
   }
 
+  header {
+    padding: 1.9rem 5.8rem 0;
+  }
+
   .content {
     width: 80%;
     transform: translateY(-5.5rem);
@@ -620,6 +635,15 @@ input[type=number] {
     /* aspect-ratio: unset; */
     height: 60vh;
   }
+
+  header {
+    padding: 2.7rem 11rem 0;
+  }
+
+  .header-svg img {
+    inline-size: 100%;   
+  }
+
 
   /* .content {
     width: 50%;
