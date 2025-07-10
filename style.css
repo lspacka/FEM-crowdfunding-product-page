@@ -4,8 +4,13 @@
     + clamp button & bookmark fonts
     + clamp all modal text
     + adjust modal buttons width
-    - clamp close modal img
+    + clamp close modal img
     + fix reward padding-bottom
+    + fix modal pledge padding
+    + fix modal reward description alignment
+    + fix pledge-header bottom padding
+    + clamp pledge-header gap
+    - clamp pledge bottom padding
 */
 
 :root {
@@ -282,6 +287,10 @@ button:not(.button-disabled):hover {
   align-items: center;
 }
 
+.desktop-rewards-left {
+  display: none;
+}
+
 .reward {
   padding: clamp(1.5rem, 4vw, 2rem);
   border: 2px solid var(--border-gray);
@@ -306,20 +315,26 @@ button:not(.button-disabled):hover {
 
 .reward-number {
   padding-bottom: 1rem;
-  /* font-size: clamp(1.1rem, 5vw, 1.8rem); */
 }
 
 .pledge-number {
-  font-size: clamp(1.1rem, 5vw, 1.8rem);
+  /* font-size: clamp(1.1rem, 5vw, 1.8rem); */
+  font-size: 1.1rem;
 }
 
+.pledge-number,
 .pledge-left {
+  padding: 0;
+  /* line-height: 0; */
+}
+
+/* .pledge-left {
   padding-bottom: 2.3rem;
 }
 
 .pledge-number {
   padding-bottom: 1.5rem;
-}
+} */
 
 /* .reward-left-div {
   display: flex;
@@ -327,7 +342,7 @@ button:not(.button-disabled):hover {
 } */
 
 .reward-left {
-  transform: translateY(12%);
+  /* transform: translateY(12%); */
   font-size: clamp(0.9rem, 4vw, 1rem);
   /* font-size: 0.9rem; */
 }
@@ -387,6 +402,10 @@ button:not(.button-disabled):hover {
   display: none;
 } */
 
+/* .modal h2 {
+  padding: clamp(0rem, 5vw, 1rem) 0 0;
+} */
+
 .modal h2,
 .pledge-header p {
   padding: 0;
@@ -431,8 +450,29 @@ button:not(.button-disabled):hover {
   line-height: 0;
 }
 
+.close-modal img {
+  inline-size: clamp(100%, 5vw, 110%);
+}
+
 .pledge-header {
   display: flex;
+  padding-bottom: 1.5rem;
+  justify-content: space-between;
+}
+
+/* .pledge-header:not(.pledge-header-no-reward) {
+  justify-content: space-between;
+} */
+
+.pledge-heading {
+  display: flex;
+  gap: clamp(.5rem, 4vw, 1.5rem);
+  /* align-items: end; */
+}
+
+.pledge-heading-text {
+  display: flex;
+  flex-direction: column;
 }
 
 /* .modal-pledges > p {
@@ -443,7 +483,7 @@ button:not(.button-disabled):hover {
   margin-top: 1.5rem;
   padding-bottom: 0;
   border: 1.7px solid var(--border-gray);
-  /* padding: clamp(1.4rem, 5vw, 3.5rem); */
+  padding: clamp(1.4rem, 5vw, 2.5rem) clamp(1.4rem, 5vw, 2rem);
 }
 
 .select-pledge {
@@ -467,14 +507,23 @@ button:not(.button-disabled):hover {
   color: var(--light-cyan);
 }
 
-.no-reward {
+/* .no-reward {
   padding-bottom: 0;
+} */
+
+/* .pledge-description {
+    padding: 0;
+} */
+
+.pledge-description {
+    padding-bottom: 1.5rem;
 }
 
 .pledge-bottom {
   /* border-top: 2px solid var(--light-gray); */
   /* padding: 0 1.4rem 1.4rem; */
-  padding: 1.5rem 1.4rem 1.4rem;
+  /* padding: 1.5rem 1.4rem 1.4rem; */
+  padding: clamp(1.5rem, 5vw, 2rem);
   border-radius: 7px;
   text-align: center;
   /* margin-bottom: 1.5rem; */
@@ -542,11 +591,9 @@ input[type=number] {
   padding: 0 1.5rem;
 }
 
-.pledge-header {
-  /* display: flex;
-  gap: 0.7rem; */
+/* .pledge-header {
   padding-bottom: 1.5rem;
-}
+} */
 
 .pledge-header,
 .pledge-left {
@@ -649,6 +696,15 @@ input[type=number] {
     width: 100%;
   } */
 
+  .pledge-header {
+    padding-bottom: 1rem;
+  }
+
+  .pledge-description {
+    padding-left: 2.7rem;
+    padding-bottom: 0;
+  }
+
   .enter-pledge-no-reward {
     display: flex;
     width: 100%;
@@ -677,6 +733,32 @@ input[type=number] {
 
   .modal-pledges {
     transform: translateY(-10rem);
+  }
+
+  .modal-pledges-header {
+    flex-direction: column;
+  }
+
+  .close-modal {
+    order: 1;
+  }
+
+  .modal h2 {
+    order: 2;
+  }
+
+  .desktop-rewards-left {
+    display: flex;
+  }
+
+  .mobile-rewards-left {
+    display: none;
+  }
+
+  .pledge-heading-text {
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
   }
 }
 
