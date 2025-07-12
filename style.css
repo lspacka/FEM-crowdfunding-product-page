@@ -1,17 +1,13 @@
 /* 
   TODO: 
-    - clamp h1 padding
-    + clamp button & bookmark fonts
-    + clamp all modal text
-    + adjust modal buttons width
-    + clamp close modal img
-    + fix reward padding-bottom
-    + fix modal pledge padding
-    + fix modal reward description alignment
-    + fix pledge-header bottom padding
-    + clamp pledge-header gap
-    - clamp pledge bottom padding
+    - fix enter pledge elements ratio
 */
+
+/* @supports(-webkit-appearance: none) or (-moz-appearance: none) {
+  input[type='radio'] {
+    appearance: none;
+  }
+} */
 
 :root {
   --button-height:      3.125rem;
@@ -96,7 +92,7 @@ button:not(.back-this-project) {
 
 button, 
 .bookmark {
-  transition: .2s ease-in-out;
+  transition: .3s ease-in-out;
 }
 
 .hero {
@@ -187,7 +183,7 @@ button:not(.button-disabled):hover {
   background-color: white;
   padding: clamp(1.4rem, 5vw, 3.5rem);
   border: 1.5px solid var(--light-gray);
-  border-radius: 7px;
+  border-radius: 8px;
 }
 
 .intro {
@@ -195,6 +191,10 @@ button:not(.button-disabled):hover {
   border-top: none;
   padding-top: 0;
   padding-bottom: 2rem;
+}
+
+.intro-p{
+  padding-bottom: .5rem;
 }
 
 /* .intro > * {
@@ -209,7 +209,7 @@ button:not(.button-disabled):hover {
   padding-top: clamp(0px, 4vw, 1.5rem);
   display: flex;
   justify-content: space-between;
-  /* gap: 0.5rem; */
+  /* gap: clamp(.5rem, 4.5vw, 5rem); */
 }
 
 .intro-buttons img {
@@ -218,7 +218,8 @@ button:not(.button-disabled):hover {
 }
 
 .back-this-project {
-  min-width: 170px;    
+  /* min-width: 210px; */
+  min-width: clamp(170px, 5vw, 210px);
   width: clamp(170px, 50vw, 200px);
 }
 
@@ -342,9 +343,12 @@ button:not(.button-disabled):hover {
 } */
 
 .reward-left {
-  /* transform: translateY(12%); */
   font-size: clamp(0.9rem, 4vw, 1rem);
   /* font-size: 0.9rem; */
+}
+
+.reward-left:not(.pledge-left) {
+  transform: translateY(12%);
 }
 
 /* padding: 0 1.7rem; */
@@ -401,6 +405,10 @@ button:not(.button-disabled):hover {
 .pledge-bottom {
   display: none;
 } */
+
+.pledge-bottom  {
+  display: none;
+}
 
 /* .modal h2 {
   padding: clamp(0rem, 5vw, 1rem) 0 0;
@@ -480,14 +488,58 @@ button:not(.button-disabled):hover {
 } */
 
 .modal-pledge {
+  /* position: relative; */
   margin-top: 1.5rem;
   padding-bottom: 0;
   border: 1.7px solid var(--border-gray);
   padding: clamp(1.4rem, 5vw, 2.5rem) clamp(1.4rem, 5vw, 2rem);
+  /* z-index: -11; */
+  /* border-bottom-width: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; */
 }
 
+.modal-pledge:has(.select-pledge:checked) {
+  border-top-color: var(--moderate-cyan);
+  border-left-color: var(--moderate-cyan);
+  border-right-color: var(--moderate-cyan);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-width: 2.5px;
+  border-bottom-width: 1.7px;
+  /* border-bottom-width: 0; */
+}
+
+.modal-pledge:has(.select-pledge:checked) + .pledge-bottom {
+  /* border-top: 1.7px solid var(--border-gray); */
+  display: block;
+  border-left: solid 2.5px var(--moderate-cyan);
+  border-bottom: solid 2.5px var(--moderate-cyan);
+  border-right: solid 2.5px var(--moderate-cyan);
+  /* z-index: 2; */
+}
+
+.modal-pledge input[type="radio"]:checked + .pledge-bottom {
+  border-color: #007bff;
+}
+
+/* .modal-pledge:has(.select-pledge:checked) + .dividing-line {
+  border: 1.5px solid var(--border-gray);
+} */
+
 .select-pledge {
-  width: 20px;
+  width: 25px;
+  height: 25px;
+  appearance: none;
+  border: 2px solid var(--border-gray);
+  border-radius: 50%;
+  background-clip: content-box;
+  padding: 5px;
+  transition: .2s ease-in;
+}
+
+.select-pledge:checked {
+  background-color: var(--moderate-cyan);
 }
 
 .modal-pledge-disabled {
@@ -524,8 +576,12 @@ button:not(.button-disabled):hover {
   /* padding: 0 1.4rem 1.4rem; */
   /* padding: 1.5rem 1.4rem 1.4rem; */
   padding: clamp(1.5rem, 5vw, 2rem);
-  border-radius: 7px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
   text-align: center;
+  /* position: relative; */
+  /* z-index: 2; */
+  /* transition: .2s ease-in; */
   /* margin-bottom: 1.5rem; */
 }
 
@@ -554,6 +610,18 @@ button:not(.button-disabled):hover {
   border: 2.2px solid var(--border-gray);
   outline: none;
   padding: 0 .5rem 0 1rem;
+  transition: .25s ease-in;
+}
+
+
+.pledge-amount:hover,
+.pledge-amount *:hover {
+  cursor: pointer;
+}
+
+.pledge-amount:has(input[type="text"]:focus) {
+  border-color: var(--moderate-cyan);
+  caret-color: var(--moderate-cyan);
 }
 
 /* .pledge-amount p {
@@ -576,7 +644,8 @@ button:not(.button-disabled):hover {
   margin-left: .5rem;
 }
 
-/* hide spinner in number type inputs */
+
+/* hide spinner in number type inputs (not used atm)*/
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
@@ -633,11 +702,16 @@ input[type=number] {
     padding: 0;
   } */
 
+  /* .intro-buttons {
+    gap: 0;
+    justify-content: space-between;
+  } */
+
   .bookmark {
     display: flex;
     background-color: var(--light-gray);
     border-radius: 50px;
-    width: 155px;
+    width: 170px;
   }
 
   .bookmark p{
@@ -651,7 +725,7 @@ input[type=number] {
     /* place-self: center; */
     /* margin: 0 auto; */
     /* display: none; */
-    font-size: .9rem;
+    font-size: 1rem;
   }
 
   .stats {
@@ -726,10 +800,15 @@ input[type=number] {
     grid-template-columns: .5fr .5fr;
   }
 
-  .pledge-bottom {
+  .modal-pledge:has(.select-pledge:checked) + .pledge-bottom {
     display: flex;
     justify-content: space-between;
   }
+
+  /* .pledge-bottom {
+    display: flex;
+    justify-content: space-between;
+  } */
 
   .modal-pledges {
     transform: translateY(-10rem);
