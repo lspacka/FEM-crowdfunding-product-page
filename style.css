@@ -1,6 +1,10 @@
 /* 
   TODO: 
     - fix enter pledge elements ratio
+    - fine-tune h1 font size
+    - fine-tune select reward buttons width
+    - style modal-completed
+    - fix bookmark img, it doesnt look completely round (maybe its just me)
 */
 
 /* @supports(-webkit-appearance: none) or (-moz-appearance: none) {
@@ -400,11 +404,12 @@ button:not(.button-disabled):hover {
   z-index: 1;
 }
 
-/* .modal, 
+.modal-pledges,
+.modal-completed, 
 .overlay,
 .pledge-bottom {
   display: none;
-} */
+}
 
 .pledge-bottom  {
   display: none;
