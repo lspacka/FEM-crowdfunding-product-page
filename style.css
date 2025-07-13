@@ -430,15 +430,29 @@ button:not(.button-disabled):hover {
 
 .modal-completed {
   text-align: center;
+  max-width: 575px;      /* 575 */
+  width: 87%;
+  padding: clamp(2rem, 5vw, 3rem) clamp(1.4rem, 5vw, 3rem);
+  transform: translateY(1.6rem);
+}
+
+.modal-completed h3 {
+  font-size: clamp(1rem, 5vw, 1.5rem);
+  padding:  clamp(1rem, 5vw, 2.2rem) 0 clamp(1rem, 5vw, 1rem);
+}
+
+#modal-completed-p {
+  font-size: clamp(0.73rem, 3.7vw, 1.05rem);
+  padding-bottom: 2rem;
 }
 
 .modal-completed-button {
   padding: 0 1rem;
-  width: clamp(100px, 20vw, 160px);
+  width: clamp(100px, 20vw, 110px);
 }
 
 .check-icon {
-  padding-bottom: 1.5rem;
+  padding-bottom: 0;
 }
 
 /* for open modal */
@@ -843,6 +857,14 @@ input[type=number] {
     flex-direction: row;
     gap: 1rem;
     align-items: center;
+  }
+
+  .modal-completed {
+    transform: translateY(-.05rem);
+  }
+
+  .check-icon img {
+    inline-size: 18%;
   }
 }
 
