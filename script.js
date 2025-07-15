@@ -1,11 +1,15 @@
 // TODO:
 //  + modal opening and closing
 //  - have the modal scroll to the pledge position
+//  - refactor to use classList.toggle as much as possible
 
 const overlay = document.querySelector('.overlay')
+const header = document.querySelector('header')
 const pledges_modal = document.querySelector('.modal-pledges')
 const confirm_modal = document.querySelector('.modal-completed')
 const burger = document.querySelector('.burger-menu')
+const header_links = document.querySelector('.links')
+const close_menu = document.querySelector('.close-menu')
 const no_reward_button = document.querySelector('.back-this-project')
 const confirm_buttons = document.querySelectorAll('.confirm-pledge')
 const reward_buttons = document.querySelectorAll('.select-reward')
@@ -14,10 +18,35 @@ const radio_inputs = document.querySelectorAll('.select-pledge')
 const pledges = document.querySelectorAll('.modal-pledge')
 const close_pledges_modal = document.querySelector('.close-modal')
 const close_confirm_modal = document.querySelector('.modal-completed-button')
+const media_query = window.matchMedia('(min-width: 800px)')
 
 // get modal_pledge width
 const modal_pledge = document.querySelector('.modal-pledge')
 const rect = modal_pledge.getBoundingClientRect()
+
+media_query.addEventListener('change', () => {
+    if (media_query.matches) {
+        burger.classList.toggle('visible')
+        header_links.classList.add('visible')
+        // header_links.style.display = 'flex'
+    }
+})
+
+burger.addEventListener('click', () => {
+    header_links.classList.add('visible')
+    burger.classList.toggle('visible')
+    close_menu.classList.add('visible')
+    // overlay.style.display = 'block'
+    // overlay.style.zIndex = -1
+    header.zIndex = 1
+})
+
+close_menu.addEventListener('click', () => {
+    header_links.classList.remove('visible')
+    burger.classList.toggle('visible')
+    close_menu.classList.remove('visible')
+    overlay.style.display = 'none'
+})
 
 no_reward_button.addEventListener('click', () => {
     pledges_modal.style.display = 'block'
