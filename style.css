@@ -3,7 +3,7 @@
     - fix enter pledge elements ratio
     - fine-tune h1 font size
     - fine-tune select reward buttons width
-    - style modal-completed
+    + style modal-completed
     - fix bookmark img, it doesnt look completely round (maybe its just me)
 */
 
@@ -53,7 +53,8 @@ h2 {
   font-size: clamp(1rem, 5vw, 1.3rem);     
 }
 
-h2, h3, p {
+h2, h3, 
+p:not(.reward-type, .link, .currency-simbol, .modal-pledges-heading) {
   padding-bottom: 1.5rem;
 }
 
@@ -126,20 +127,29 @@ button,
   transform: translateY(3rem);
   margin: 0 auto;
   width: 100%;
+  /* width: 87%; */
+  /* max-width: 777px; */
   background-color: white;
   display: flex;
   flex-direction: column;
   z-index: 1;
   border-radius: 8px;
+  /* gap: 2rem; */
   /* background-color: rgb(251, 248, 249); */
+  border: 1px red solid;
 }
 
 .link {
+  padding: 1rem;
+}
+
+.link a {
   text-decoration: none;
   /* font-size: .97rem; */
   font-weight: 500;
   color: var(--dark-wat);
-  padding: 1.5rem;
+  /* padding: 1.5rem; */
+  width: fit-content;
 }
 
 .link:not(.link:nth-of-type(3)) {
@@ -228,7 +238,7 @@ button:not(.button-disabled):hover {
   text-align: center;
   border-top: none;
   padding-top: 0;
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
 }
 
 .intro-p{
@@ -244,7 +254,7 @@ button:not(.button-disabled):hover {
 }
 
 .intro-buttons {
-  padding-top: clamp(0px, 4vw, 1.5rem);
+  padding-top: clamp(0px, 4vw, .7rem);
   display: flex;
   justify-content: space-between;
   /* gap: clamp(.5rem, 4.5vw, 5rem); */
@@ -265,6 +275,7 @@ button:not(.button-disabled):hover {
   /* display: flex;
   flex-direction: column;
   place-items: center; */
+  padding-bottom: clamp(2rem, 5vw, 3.5rem);
   text-align: center;
 }
 
@@ -312,9 +323,9 @@ button:not(.button-disabled):hover {
   margin-top: 2rem;
 }
 
-.about {
+/* .about {
   padding: 1rem 0 0;
-}
+} */
 
 .about p:nth-of-type(2) {
   padding-bottom: 0.5rem;
@@ -324,6 +335,7 @@ button:not(.button-disabled):hover {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  /* height: fit-content; */
 }
 
 .desktop-rewards-left {
@@ -385,9 +397,9 @@ button:not(.button-disabled):hover {
   /* font-size: 0.9rem; */
 }
 
-.reward-left:not(.pledge-left) {
+/* .reward-left:not(.pledge-left) {
   transform: translateY(12%);
-}
+} */
 
 /* padding: 0 1.7rem; */
 /* .select-reward {
@@ -443,6 +455,11 @@ button:not(.button-disabled):hover {
 .overlay,
 .pledge-bottom {
   display: none;
+}
+
+.modal-pledges {
+  padding: clamp(1.5rem, 5vw, 2.5rem) clamp(1.5rem, 5vw, 3rem);
+  /* padding-bottom: 0; */
 }
 
 .pledge-bottom  {
@@ -502,7 +519,7 @@ button:not(.button-disabled):hover {
 }
 
 .modal-pledges-heading {
-  padding: 1.5rem 0 0;
+  padding: 1.5rem 0 0 0;
 }
 
 .close-modal {
@@ -545,7 +562,7 @@ button:not(.button-disabled):hover {
   margin-top: 1.5rem;
   padding-bottom: 0;
   border: 1.7px solid var(--border-gray);
-  padding: clamp(1.4rem, 5vw, 2.5rem) clamp(1.4rem, 5vw, 2rem);
+  padding: clamp(1.4rem, 5vw, 2.5rem) clamp(1.4rem, 5vw, 2rem) 0;
   /* z-index: -11; */
   /* border-bottom-width: 0;
   border-bottom-left-radius: 0;
@@ -561,6 +578,10 @@ button:not(.button-disabled):hover {
   border-width: 2.5px;
   border-bottom-width: 1.7px;
   /* border-bottom-width: 0; */
+}
+
+.pb-no-reward p {
+  visibility: hidden;
 }
 
 .modal-pledge:has(.select-pledge:checked) + .pledge-bottom {
@@ -589,6 +610,7 @@ button:not(.button-disabled):hover {
   background-clip: content-box;
   padding: 5px;
   transition: .2s ease-in;
+  align-self: center;
 }
 
 .select-pledge:checked {
@@ -639,7 +661,7 @@ button:not(.button-disabled):hover {
 }
 
 /* .no-reward-button {
-  margin-left: auto;
+  justify-self: self-end;
 } */
 
 .enter-pledge-no-reward {
@@ -666,7 +688,6 @@ button:not(.button-disabled):hover {
   transition: .25s ease-in;
 }
 
-
 .pledge-amount:hover,
 .pledge-amount *:hover {
   cursor: pointer;
@@ -677,13 +698,16 @@ button:not(.button-disabled):hover {
   caret-color: var(--moderate-cyan);
 }
 
+.nr-pledge-amount {
+  visibility: hidden;
+}
+
 /* .pledge-amount p {
   font-size: 2rem;
 } */
 
 .currency-simbol {
   align-self: center;
-  /* font-size: .9rem; */
   color: var(--lightish-gray);
   padding: 0;
 }
@@ -709,9 +733,9 @@ input[type=number] {
   appearance: textfield;
 }
 
-.confirm-pledge {
+/* .confirm-pledge {
   padding: 0 1.5rem;
-}
+} */
 
 /* .pledge-header {
   padding-bottom: 1.5rem;
@@ -821,6 +845,14 @@ input[type=number] {
     padding-left: 1.5rem;
   }
 
+  h2 {
+    padding-bottom: 2rem;
+  }
+
+  .about p:nth-of-type(2) {
+    padding-bottom: 1.5rem;
+  }
+
   /* .number-1, .number-2 {
     border-right: 1px solid var(--light-gray);
   } */
@@ -872,6 +904,10 @@ input[type=number] {
     justify-content: space-between;
   }
 
+  /* .pb-no-reward {
+    display: flex;
+  } */
+
   /* .pledge-bottom {
     display: flex;
     justify-content: space-between;
@@ -913,6 +949,11 @@ input[type=number] {
 
   .check-icon img {
     inline-size: 18%;
+  }
+
+  .no-reward-button {
+    min-width: 180px;
+    margin-left: auto;
   }
 }
 
