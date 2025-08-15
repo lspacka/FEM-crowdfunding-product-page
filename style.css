@@ -167,6 +167,8 @@ button,
 .bookmark,
 .close-modal,
 .close-menu,
+.reward-type,
+.select-pledge,
 button:not(.button-disabled):hover {
   cursor: pointer;
 }
@@ -351,12 +353,19 @@ button:not(.button-disabled):hover {
   padding-bottom: 0.1rem;
   font-weight: 700;
   color: black;
+  transition: .2s ease-in;
+}
+
+.reward-type:hover,
+.reward-type:hover ~ .pledge-minimum {
+  color: var(--dark-cyan);
 }
 
 .pledge-minimum {
   color: var(--moderate-cyan);
   font-weight: 700;
   padding-bottom: 1.2rem;
+  transition: .2s ease-in;
 }
 
 .reward-description {
@@ -530,6 +539,7 @@ button:not(.button-disabled):hover {
 
 .close-modal img {
   inline-size: clamp(100%, 5vw, 110%);
+  /* transition: .2s ease-in; */
 }
 
 .pledge-header {

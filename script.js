@@ -7,8 +7,6 @@ const overlay = document.querySelector('.overlay')
 const header = document.querySelector('header')
 const pledges_modal = document.querySelector('.modal-pledges')
 const confirm_modal = document.querySelector('.modal-completed')
-const burger = document.querySelector('.burger-menu')
-const header_links = document.querySelector('.links')
 const close_menu = document.querySelector('.close-menu')
 const no_reward_button = document.querySelector('.back-this-project')
 const confirm_buttons = document.querySelectorAll('.confirm-pledge')
@@ -24,12 +22,20 @@ const media_query = window.matchMedia('(min-width: 800px)')
 const modal_pledge = document.querySelector('.modal-pledge')
 const rect = modal_pledge.getBoundingClientRect()
 
+// burger menu logic
+const burger = document.querySelector('.burger-menu')
+const header_links = document.querySelector('.links')
+
 media_query.addEventListener('change', () => {
     if (media_query.matches) {
         burger.classList.toggle('visible')
         header_links.classList.add('visible')
         // header_links.style.display = 'flex'
-    }
+    } 
+    // else {
+    //     burger.classList.remove('visible')
+    //     header_links.classList.remove('visible')
+    // }
 })
 
 burger.addEventListener('click', () => {
@@ -48,6 +54,7 @@ close_menu.addEventListener('click', () => {
     overlay.style.display = 'none'
 })
 
+// modals logic
 no_reward_button.addEventListener('click', () => {
     pledges_modal.style.display = 'block'
     overlay.style.display = 'block'
@@ -85,11 +92,28 @@ confirm_buttons.forEach((button, index) =>
     })
 )
 
-// focus input regardless of where its container is clicked
+// focus text input regardless of where its container is clicked
 text_inputs.forEach(input => 
     input.addEventListener('click', () => 
         input.querySelector('input[type="text"]').focus()
     )
 )
 
-// console.log(rect.width)
+// changes radio input border color when hovering on the reward type
+const pledge_headings = document.querySelectorAll('.pledge-heading')
+pledge_headings.forEach(heading => {
+    const input = heading.querySelector('.select-pledge')
+    const text = heading.querySelector('.reward-type')
+
+    text.addEventListener('mouseover', () => {
+        input.style.borderColor = 'hsl(176, 72%, 28%)'
+    })
+
+    text.addEventListener('mouseout', () => {
+        input.style.borderColor = 'hsl(0, 0%, 90%)'
+    })
+
+    text.addEventListener('click', () => {
+        input.checked = true
+    })
+})
