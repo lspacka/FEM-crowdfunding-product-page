@@ -5,9 +5,9 @@
 
 const overlay = document.querySelector('.overlay')
 const header = document.querySelector('header')
+const header_flair = document.querySelector('.header-flair')
 const pledges_modal = document.querySelector('.modal-pledges')
 const confirm_modal = document.querySelector('.modal-completed')
-const close_menu = document.querySelector('.close-menu')
 const no_reward_button = document.querySelector('.back-this-project')
 const confirm_buttons = document.querySelectorAll('.confirm-pledge')
 const reward_buttons = document.querySelectorAll('.select-reward')
@@ -23,34 +23,38 @@ const modal_pledge = document.querySelector('.modal-pledge')
 const rect = modal_pledge.getBoundingClientRect()
 
 // burger menu logic
-const burger = document.querySelector('.burger-menu')
+const burger_button = document.querySelector('.burger-menu')
+const close_menu = document.querySelector('.close-menu')
 const header_links = document.querySelector('.links')
 
-media_query.addEventListener('change', () => {
-    if (media_query.matches) {
-        burger.classList.toggle('visible')
-        header_links.classList.add('visible')
-        // header_links.style.display = 'flex'
-    } 
-    // else {
-    //     burger.classList.remove('visible')
-    //     header_links.classList.remove('visible')
-    // }
-})
+function handleViewportChange(event) {
+    if (event.matches) {
+        header_links.classList.remove('visible')
+        overlay.style.display = 'none'
+        burger_button.style.display = 'none'
+        close_menu.classList.remove('visible')
+    } else {
+        burger_button.style.display = 'block'
+    }
+}
 
-burger.addEventListener('click', () => {
+media_query.addEventListener('change', handleViewportChange)
+handleViewportChange(media_query)
+
+burger_button.addEventListener('click', () => {
     header_links.classList.add('visible')
-    burger.classList.toggle('visible')
     close_menu.classList.add('visible')
-    // overlay.style.display = 'block'
-    // overlay.style.zIndex = -1
-    header.zIndex = 1
+    burger_button.style.display = 'none'
+    // overlay.classList.add('visible')
+    overlay.style.display = 'block'
+    // header_flair.style.zIndex = 1
 })
 
 close_menu.addEventListener('click', () => {
     header_links.classList.remove('visible')
-    burger.classList.toggle('visible')
+    burger_button.style.display = 'block'
     close_menu.classList.remove('visible')
+    // overlay.classList.remove('visible')
     overlay.style.display = 'none'
 })
 
@@ -99,8 +103,9 @@ text_inputs.forEach(input =>
     )
 )
 
-// changes radio input border color when hovering on the reward type
+// changes radio input border color when hovering on the neighbor text (.reward-type)
 const pledge_headings = document.querySelectorAll('.pledge-heading')
+
 pledge_headings.forEach(heading => {
     const input = heading.querySelector('.select-pledge')
     const text = heading.querySelector('.reward-type')

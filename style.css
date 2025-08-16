@@ -1,10 +1,13 @@
 /* 
   TODO: 
-    - fix enter pledge elements ratio
+    + fix enter pledge elements ratio
     - fine-tune h1 font size
-    - fine-tune select reward buttons width
+    + fine-tune select reward buttons width
     + style modal-completed
     - fix bookmark img, it doesnt look completely round (maybe its just me)
+    - align .links width with that of .content
+    - overlay gradient
+    - modals animations
 */
 
 /* @supports(-webkit-appearance: none) or (-moz-appearance: none) {
@@ -110,6 +113,7 @@ button,
 
 .header-flair {
   display: flex;
+  z-index: 1;
 }
 
 .header-svg img {
@@ -118,8 +122,7 @@ button,
 }
 
 .links,
-.close-menu,
-.burger-menu {
+.close-menu {
   display: none;
 }
 
@@ -136,14 +139,14 @@ button,
   border-radius: 8px;
   /* gap: 2rem; */
   /* background-color: rgb(251, 248, 249); */
-  border: 1px red solid;
+  /* border: 1px red solid; */
 }
 
 .link {
   padding: 1rem;
 }
 
-.link a {
+.link {
   text-decoration: none;
   /* font-size: .97rem; */
   font-weight: 500;
@@ -156,7 +159,15 @@ button,
   border-bottom: 1px solid var(--light-gray);
 }
 
-.burger-menu.visible,
+/* .burger-menu {
+  display: block;
+} */
+
+.burger-menu,
+.close-menu {
+  margin-left: auto;
+}
+
 .close-menu.visible {
   display: block;
   height: fit-content;
@@ -438,13 +449,18 @@ button:not(.button-disabled):hover {
 }
 
 .overlay {
+  display: block;
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   background-color: hsl(0, 0%, 3%, 60%);
-  /* display: none; */
+  /* background-color: linear-gradient(
+    to bottom,
+    hsl(0, 0%, 3%, 0.6) 0%,
+    hsl(0, 0%, 3%, 0) 100%
+  ); */
 }
 
 .modal {
@@ -769,19 +785,41 @@ input[type=number] {
 
   header {
     padding: 1.9rem 5.8rem 0;
+    flex-direction: row;
+    
   }
 
-  .links.visible,
+  .links {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    /* transform: translateY(-3rem); */
+    gap: 2.5rem;
+    /* flex-direction: row; */
+    /* background-color: red; */
+  }
+
+  .link {
+    padding: 0;
+    color: var(--lighter-gray);
+    font-size: .9rem;
+  }
+
+  .link:not(.link:nth-of-type(3)) {
+    border-bottom: 0px;
+  }
+
+  /* .links,
   .header-flair {
     flex-direction: row;
-  }
+  } */
 
   /* .header-links.visible {
     flex-direction: row;
   } */
 
-  .burger-menu.visible,
-  .close-menu.visible {
+  .burger-menu,
+  .close-menu {
     display: none
   }
 
