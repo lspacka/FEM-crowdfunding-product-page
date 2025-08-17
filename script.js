@@ -1,7 +1,6 @@
 // TODO:
 //  + modal opening and closing
 //  - have the modal scroll to the pledge position
-//  - refactor to use classList.toggle as much as possible
 
 const overlay = document.querySelector('.overlay')
 const header = document.querySelector('header')
