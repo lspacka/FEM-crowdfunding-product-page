@@ -325,12 +325,20 @@ button:not(.button-disabled):hover {
   margin-top: .7rem;
 }
 
-.progress-bar {
+.progress-container {
   width: 100%;
+  /* border: 1px solid var(--border-gray); */
+  height: fit-content;
+  margin-top: 2rem;
+  border-radius: 50px;
+  background-color: var(--light-gray);
+}
+
+.progress-bar {
+  width: 89.914%;
   height: 12px;
   border-radius: 50px;
-  background-color: rebeccapurple;
-  margin-top: 2rem;
+  background-color: var(--moderate-cyan);
 }
 
 /* .about {
@@ -497,7 +505,7 @@ button:not(.button-disabled):hover {
   padding: 0;
 }
 
-.modal p:not(.reward-number, .reward-left){         /* ? */
+.modal p:not(.reward-number, .reward-left, .input-error){         /* ? */
   font-size: clamp(0.73rem, 3.7vw, .9rem);
 }
 
@@ -704,6 +712,7 @@ button:not(.button-disabled):hover {
 
 .pledge-amount {
   display: flex;
+  flex-shrink: 0;
   border-radius: 50px;
   border: 2.2px solid var(--border-gray);
   outline: none;
@@ -742,6 +751,20 @@ button:not(.button-disabled):hover {
   outline: none;
   font-weight: 700;
   margin-left: .5rem;
+}
+
+.pledge-amount.error {
+  border-color: rgb(188, 32, 32);
+}
+
+.input-error {
+  color: rgb(188, 32, 32);
+  transition: .3s ease-in;
+  font-size: .7rem;
+  /* width: fit-content; */
+  /* justify-self: flex-end; */
+  /* font-size: .1rem; */
+  /* background-color: red; */
 }
 
 

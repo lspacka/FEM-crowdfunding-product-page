@@ -63,12 +63,12 @@
             <div class="stats">
               <div class="numbers">
                 <div class="number number-1">
-                  <p class="stat-number">$89,914</p>
+                  <p class="stat-number total-collected">$89,914</p>
                   <p class="stat">of $100,000 backed</p>
                 </div>
                 <div class="bottom-border"></div>
                 <div class="number number-2">
-                  <p class="stat-number">5,007</p>
+                  <p class="stat-number total-backers">5,007</p>
                   <p class="stat">total backers</p>
                 </div>
                 <div class="bottom-border"></div>
@@ -77,7 +77,9 @@
                   <p class="stat">days left</p>
                 </div>
               </div>
-              <div class="progress-bar"></div>
+              <div class="progress-container">
+                <div class="progress-bar"></div>
+              </div>
             </div>
             <div class="rewards">
               <div class="about">
@@ -211,7 +213,7 @@
               </div>
             </div>
             <div class="rewards-left desktop-rewards-left">
-              <p class="reward-number pledge-number">101</p>
+              <p class="reward-number pledge-number active-quantity">101</p>
               <div class="reward-left-div">
                 <p class="reward-left pledge-left">left</p>
               </div>
@@ -229,14 +231,17 @@
           </div>
         </div>
       </div>
-      <div class="pledge-bottom">
+      <div class="pledge-bottom active-pledge">
         <p>Enter your pledge</p>
-        <div class="enter-pledge">
-          <div class="pledge-amount">
-            <p class="currency-simbol">$</p>
-            <input type="text">
+        <div class="enter-pledge-container">
+          <div class="enter-pledge">
+            <div class="pledge-amount">
+              <p class="currency-simbol">$</p>
+              <input type="text" pattern="\d" placeholder="25" inputmode="numeric">
+            </div>    
+            <button class="confirm-pledge active-confirm">Continue</button>
           </div>
-          <button class="confirm-pledge">Continue</button>
+          <p class="input-error"></p>
         </div>
       </div>
       <!-- BLACK EDITION STAND -->
@@ -259,7 +264,7 @@
               </div>
             </div>
             <div class="rewards-left desktop-rewards-left">
-              <p class="reward-number pledge-number">64</p>
+              <p class="reward-number pledge-number active-quantity">64</p>
               <div class="reward-left-div">
                 <p class="reward-left pledge-left">left</p>
               </div>
@@ -277,14 +282,17 @@
           </div>
         </div>
       </div>
-      <div class="pledge-bottom">
+      <div class="pledge-bottom active-pledge">
         <p>Enter your pledge</p>
-        <div class="enter-pledge">
-          <div class="pledge-amount">
-            <p class="currency-simbol">$</p>
-            <input type="text" min="75">
+        <div class="enter-pledge-container">
+          <div class="enter-pledge">
+            <div class="pledge-amount">
+              <p class="currency-simbol">$</p>
+              <input type="text" pattern="\d" placeholder="75">
+            </div>
+            <button class="confirm-pledge active-confirm">Continue</button>
           </div>
-          <button class="confirm-pledge">Continue</button>
+          <p class="input-error"></p>
         </div>
       </div>
       <!-- MAHOGANY SPECIAL EDITION -->
