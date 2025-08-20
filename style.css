@@ -336,6 +336,7 @@ button:not(.button-disabled):hover {
 
 .progress-bar {
   width: 89.914%;
+  max-width: 100%;
   height: 12px;
   border-radius: 50px;
   background-color: var(--moderate-cyan);

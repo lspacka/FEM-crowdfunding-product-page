@@ -1,13 +1,15 @@
 // TODO:
 //  + modal opening and closing
 //  - have the modal scroll to the pledge position
+//  - clean input after pledging
+//  - refactor
 
 const overlay = document.querySelector('.overlay')
 const header = document.querySelector('header')
 const header_flair = document.querySelector('.header-flair')
 const pledges_modal = document.querySelector('.modal-pledges')
 const confirm_modal = document.querySelector('.modal-completed')
-const no_reward_button = document.querySelector('.back-this-project')
+const back_this_project = document.querySelector('.back-this-project')
 const confirm_buttons = document.querySelectorAll('.confirm-pledge')
 const reward_buttons = document.querySelectorAll('.select-reward')
 const text_inputs = document.querySelectorAll('.pledge-amount')
@@ -22,19 +24,27 @@ const rect = modal_pledge.getBoundingClientRect()
 
 // pledge logic
 const pledges = document.querySelectorAll('.active-pledge')
+const rewards_number = document.querySelectorAll('.reward-number')
 const rewards_left = document.querySelectorAll('.active-quantity')
-const total_collected = document.querySelector('.total-collected')
 const total_backers = document.querySelector('.total-backers')
+const progress_bar_container = document.querySelector('.progress-container')
 const progress_bar = document.querySelector('.progress-bar')
+const total_collected = document.querySelector('.total-collected')
+// const input_error = pledge.querySelector('.input-error')
+const goal_value = 100000
 
-console.log(pledges)
+console.log(total_collected.textContent)
 pledges.forEach((pledge, index) => {
     const input = pledge.querySelector('input')
     const input_border = pledge.querySelector('.pledge-amount')
     const confirm_pledge = pledge.querySelector('.active-confirm')
     const input_error = pledge.querySelector('.input-error')
+    // const goal_value = 100000
+    // const total_collected = document.querySelector('.total-collected')
+    // const progress_bar = document.querySelector('.progress-bar')
     const minimums = [25, 75]
     const reward_quantity = rewards_left[index]
+    const reward_number = rewards_number[index]
 
     confirm_pledge.addEventListener('click', () => {
         val = Number(input.value)
@@ -44,23 +54,52 @@ pledges.forEach((pledge, index) => {
             input_error.textContent = "Please enter a Numeric Value"
             
         } else {
-            if (val && val<minimums[index]) {
+            if (!val && val<minimums[index]) {
                 input_error.style.display = 'block'
                 input_border.classList.add('error')
                 input_error.textContent = `Please pledge a minimum of \$${minimums[index]}`
             } else {
                 // add input value to total collected
-                // total_backers++
+                const input_text = input.value
+                const input_value = parseFloat(input_text)
+                const total_text = total_collected.textContent
+                const numstr1 = total_text.replace(/[^0-9.]/g, "")
+                let total_value = parseFloat(numstr1)
+
+                total_value += input_value
+                total_collected.textContent = `\$${total_value.toLocaleString("en-US")}`
+                
+                // update progress bar
+                const progress_bar_max = progress_bar_container.clientWidth
+                let percentage = (total_value/goal_value) * 100
+                // let new_width = progress_bar.clientWidth += percentage
+                progress_bar.style.width = percentage + "%"
+
+                // increment total backers number
+                const backers_text = total_backers.textContent
+                // console.log('backers text: ', backers_text)
+                const numstr2 = backers_text.replace(/[^0-9.]/g, "")
+                backers_value = parseFloat(numstr2)
+                // console.log('total backers: ', backers_value)
+
+                backers_value++
+                total_backers.textContent = backers_value.toLocaleString("en-US")
+
                 // decrement reward_quantity
-                // calc input percentage - divide by 100000 and then mult by 100
-                // increment progress bar by percentage
+                const reward_quantity_text = reward_quantity.textContent
+                let reward_value = parseInt(reward_quantity_text)
+
+                reward_value--
+                reward_quantity.textContent = reward_value
+                reward_number.textContent = reward_value
+                // console.log('reward quantity: ', reward_quantity_text)
 
                 input_border.classList.remove('error')
                 pledges_modal.style.display = 'none'
                 confirm_modal.style.display = 'block'
                 header_flair.style.zIndex = 0;
                 input_error.style.display = 'none'
-                console.log(val*2)
+                // console.log(val*2)
             }
         }
     })
@@ -101,7 +140,9 @@ close_menu.addEventListener('click', () => {
 })
 
 // modals logic
-no_reward_button.addEventListener('click', () => {
+const no_reward_confirm = document.querySelector('.no-reward-button')
+
+back_this_project.addEventListener('click', () => {
     pledges_modal.style.display = 'block'
     overlay.style.display = 'block'
     header_flair.style.zIndex = 0;
@@ -118,7 +159,7 @@ reward_buttons.forEach((button, index) => {
         overlay.style.display = 'block'
         // window.scrollTo({ top: top, behavior: 'smooth' })
         radio_inputs[index+1].checked = true     // OJO CUIDAO!
-        console.log(top)
+        // console.log(top)
         // console.log(pledges[index+1])
     })
 })
@@ -133,14 +174,19 @@ close_confirm_modal.addEventListener('click', () => {
     overlay.style.display = 'none'
 })
 
-// confirm_buttons.forEach((button, index) => 
-//     button.addEventListener('click', () => {
-//         pledges_modal.style.display = 'none'
-//         confirm_modal.style.display = 'block'
-//         header_flair.style.zIndex = 0;
-//         window.scrollTo({ top: 0, behavior: 'smooth' })
-//     })
-// )
+no_reward_confirm.addEventListener('click', () => {
+    const backers_text = total_backers.textContent
+    const numstr2 = backers_text.replace(/[^0-9.]/g, "")
+
+    backers_value = parseFloat(numstr2)
+    backers_value++
+    total_backers.textContent = backers_value.toLocaleString("en-US")
+
+    pledges_modal.style.display = 'none'
+    confirm_modal.style.display = 'block'
+    header_flair.style.zIndex = 0;
+    input_error.style.display = 'none'
+})
 
 // focus text input regardless of where its container is clicked
 text_inputs.forEach(input => 
