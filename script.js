@@ -1,8 +1,9 @@
 // TODO:
 //  + modal opening and closing
-//  - have the modal scroll to the pledge position
-//  - clean input after pledging
+//  + have the modal scroll to the pledge position
+//  + clean input after pledging
 //  - disable hovering fx on disabled reward
+//  - improve auto-scroll
 //  - refactor
 
 const overlay = document.querySelector('.overlay')
@@ -57,7 +58,7 @@ pledges.forEach((pledge, index) => {
             if (!val || val<minimums[index]) {
                 input_error.style.display = 'block'
                 input_border.classList.add('error')
-                input_error.textContent = `Please pledge a minimum of \$${minimums[index]}`
+                input_error.textContent = `Pledge a minimum of \$${minimums[index]} to continue`
             } else {
                 // add input value to total collected
                 const input_text = input.value
@@ -89,8 +90,6 @@ pledges.forEach((pledge, index) => {
                 reward_quantity.textContent = reward_value
                 reward_number.textContent = reward_value
 
-                // input_border.classList.remove('error')
-                // input_error.style.display = 'none'
                 // clear all inputs and error states:
                 input_borders.forEach(item => { item.classList.remove('error') })
                 input_errors.forEach(item => { item.style.display = 'none' })
@@ -99,8 +98,6 @@ pledges.forEach((pledge, index) => {
                     item.placeholder = minimums[index2]
                 })
 
-                // input.value = null
-                // input.placeholder = minimums[index]
                 pledges_modal.style.display = 'none'
                 confirm_modal.style.display = 'block'
                 header_flair.style.zIndex = 0;
@@ -145,40 +142,30 @@ close_menu.addEventListener('click', () => {
 
 // modals logic
 const no_reward_confirm = document.querySelector('.no-reward-button')
-const open_plede_modal_buttons = document.querySelectorAll('.open-pledge-modal')
+const open_pledge_modal_buttons = document.querySelectorAll('.open-pledge-modal')
 
-open_plede_modal_buttons.forEach((button, index) => {
+open_pledge_modal_buttons.forEach((button, index) => {
     button.addEventListener('click', () => {
+        const target_id = button.id.replace("open-", "")
+        const target_section = document.getElementById(target_id)
+
         pledges_modal.style.display = 'block'
         overlay.style.display = 'block'
         header_flair.style.zIndex = 0;
         radio_inputs[index].checked = true
-        window.scrollTo({ top: top, behavior: 'smooth' })
+        
+        // auto-scrolls to the appropiate reward
+        requestAnimationFrame(() => {
+            target_section.scrollIntoView({ behavior: "smooth", block: "start" })
+
+            if (index != 0) {
+                setTimeout(() => {
+                    window.scrollBy({ top: -20, behavior: "smooth" });
+                }, 300);
+            } 
+        })
     })
 })
-
-// back_this_project.addEventListener('click', () => {
-//     pledges_modal.style.display = 'block'
-//     overlay.style.display = 'block'
-//     header_flair.style.zIndex = 0;
-//     radio_inputs[0].checked = true
-// })
-
-// // tryna move the viewport to the appropiate pledge
-// reward_buttons.forEach((button, index) => {
-//     button.addEventListener('click', () => {
-//         let top = pledges[index].offsetTop
-//         // top = top.top
-//         pledges_modal.style.display = 'block'
-//         header_flair.style.zIndex = 0;
-//         overlay.style.display = 'block'
-//         window.scrollTo({ top: top, behavior: 'smooth' })
-//         radio_inputs[index+1].checked = true     
-//         // console.log(top)
-//         // console.log(pledges[index+1])
-//     })
-// })
-
 
 close_pledges_modal.addEventListener('click', () => {
     pledges_modal.style.display = 'none'
