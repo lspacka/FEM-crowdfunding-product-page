@@ -2,6 +2,7 @@
 //  + modal opening and closing
 //  - have the modal scroll to the pledge position
 //  - clean input after pledging
+//  - disable hovering fx on disabled reward
 //  - refactor
 
 const overlay = document.querySelector('.overlay')
@@ -30,19 +31,19 @@ const total_backers = document.querySelector('.total-backers')
 const progress_bar_container = document.querySelector('.progress-container')
 const progress_bar = document.querySelector('.progress-bar')
 const total_collected = document.querySelector('.total-collected')
-// const input_error = pledge.querySelector('.input-error')
 const goal_value = 100000
+const minimums = [25, 75]
+// these are for clearing all inputs and error messages after confirming the pledge:
+const inputs = document.querySelectorAll('.text-input')
+const input_borders = document.querySelectorAll('.pledge-amount')
+const input_errors = document.querySelectorAll('.input-error')
+console.log('inputs: ', inputs.length)
 
-console.log(total_collected.textContent)
 pledges.forEach((pledge, index) => {
     const input = pledge.querySelector('input')
     const input_border = pledge.querySelector('.pledge-amount')
     const confirm_pledge = pledge.querySelector('.active-confirm')
     const input_error = pledge.querySelector('.input-error')
-    // const goal_value = 100000
-    // const total_collected = document.querySelector('.total-collected')
-    // const progress_bar = document.querySelector('.progress-bar')
-    const minimums = [25, 75]
     const reward_quantity = rewards_left[index]
     const reward_number = rewards_number[index]
 
@@ -51,10 +52,9 @@ pledges.forEach((pledge, index) => {
         if (Number.isNaN(val)) {
             input_error.style.display = 'block'
             input_border.classList.add('error')
-            input_error.textContent = "Please enter a Numeric Value"
-            
+            input_error.textContent = "Please enter a Numeric Value"            
         } else {
-            if (!val && val<minimums[index]) {
+            if (!val || val<minimums[index]) {
                 input_error.style.display = 'block'
                 input_border.classList.add('error')
                 input_error.textContent = `Please pledge a minimum of \$${minimums[index]}`
@@ -70,18 +70,14 @@ pledges.forEach((pledge, index) => {
                 total_collected.textContent = `\$${total_value.toLocaleString("en-US")}`
                 
                 // update progress bar
-                const progress_bar_max = progress_bar_container.clientWidth
                 let percentage = (total_value/goal_value) * 100
-                // let new_width = progress_bar.clientWidth += percentage
                 progress_bar.style.width = percentage + "%"
 
                 // increment total backers number
                 const backers_text = total_backers.textContent
-                // console.log('backers text: ', backers_text)
                 const numstr2 = backers_text.replace(/[^0-9.]/g, "")
+                
                 backers_value = parseFloat(numstr2)
-                // console.log('total backers: ', backers_value)
-
                 backers_value++
                 total_backers.textContent = backers_value.toLocaleString("en-US")
 
@@ -92,14 +88,22 @@ pledges.forEach((pledge, index) => {
                 reward_value--
                 reward_quantity.textContent = reward_value
                 reward_number.textContent = reward_value
-                // console.log('reward quantity: ', reward_quantity_text)
 
-                input_border.classList.remove('error')
+                // input_border.classList.remove('error')
+                // input_error.style.display = 'none'
+                // clear all inputs and error states:
+                input_borders.forEach(item => { item.classList.remove('error') })
+                input_errors.forEach(item => { item.style.display = 'none' })
+                inputs.forEach((item, index2) => {
+                    item.value = ''
+                    item.placeholder = minimums[index2]
+                })
+
+                // input.value = null
+                // input.placeholder = minimums[index]
                 pledges_modal.style.display = 'none'
                 confirm_modal.style.display = 'block'
                 header_flair.style.zIndex = 0;
-                input_error.style.display = 'none'
-                // console.log(val*2)
             }
         }
     })
@@ -141,28 +145,40 @@ close_menu.addEventListener('click', () => {
 
 // modals logic
 const no_reward_confirm = document.querySelector('.no-reward-button')
+const open_plede_modal_buttons = document.querySelectorAll('.open-pledge-modal')
 
-back_this_project.addEventListener('click', () => {
-    pledges_modal.style.display = 'block'
-    overlay.style.display = 'block'
-    header_flair.style.zIndex = 0;
-    radio_inputs[0].checked = true
-})
-
-// tryna move the viewport to the appropiate pledge
-reward_buttons.forEach((button, index) => {
+open_plede_modal_buttons.forEach((button, index) => {
     button.addEventListener('click', () => {
-        let top = pledges[index].offsetTop
-        // top = top.top
         pledges_modal.style.display = 'block'
-        header_flair.style.zIndex = 0;
         overlay.style.display = 'block'
-        // window.scrollTo({ top: top, behavior: 'smooth' })
-        radio_inputs[index+1].checked = true     // OJO CUIDAO!
-        // console.log(top)
-        // console.log(pledges[index+1])
+        header_flair.style.zIndex = 0;
+        radio_inputs[index].checked = true
+        window.scrollTo({ top: top, behavior: 'smooth' })
     })
 })
+
+// back_this_project.addEventListener('click', () => {
+//     pledges_modal.style.display = 'block'
+//     overlay.style.display = 'block'
+//     header_flair.style.zIndex = 0;
+//     radio_inputs[0].checked = true
+// })
+
+// // tryna move the viewport to the appropiate pledge
+// reward_buttons.forEach((button, index) => {
+//     button.addEventListener('click', () => {
+//         let top = pledges[index].offsetTop
+//         // top = top.top
+//         pledges_modal.style.display = 'block'
+//         header_flair.style.zIndex = 0;
+//         overlay.style.display = 'block'
+//         window.scrollTo({ top: top, behavior: 'smooth' })
+//         radio_inputs[index+1].checked = true     
+//         // console.log(top)
+//         // console.log(pledges[index+1])
+//     })
+// })
+
 
 close_pledges_modal.addEventListener('click', () => {
     pledges_modal.style.display = 'none'
