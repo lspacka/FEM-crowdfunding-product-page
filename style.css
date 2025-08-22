@@ -1,10 +1,10 @@
 /* 
   TODO: 
-    - fine-tune h1 font size
-    - fix bookmark img, it doesnt look completely round (maybe its just me)
+    - fine-tune font sizes
     - align .links width with that of .content
     - overlay gradient
     - fix input error top padding
+    - add hover to close modal svg
     - modals animations
 */
 
@@ -21,6 +21,7 @@
   --border-gray:        hsl(0, 0%, 90%);    
   --lightish-gray:      hsl(0, 0%, 73%);
   --dark-gray:          hsl(0, 0%, 48%);
+  --lighter-cyan:       hsl(192, 29%, 97%);
   --light-cyan:         hsl(170, 28%, 76%);
   --moderate-cyan:      hsl(176, 50%, 47%);
   --dark-cyan:          hsl(176, 72%, 28%);
@@ -190,29 +191,31 @@ button:not(.button-disabled):hover {
   display: none;
 }
 
-/* .bookmark {
-  filter: 
-    brightness(0) 
-    saturate(100%) 
-    invert(16%) 
-    sepia(0%) 
-    saturate(2462%) 
-    hue-rotate(277deg) 
-    brightness(98%) 
-    contrast(91%);
-} */
+.bookmark:hover .outer-circle {
+  fill: var(--dark-gray);
+}
 
-/* .bookmark:hover {
-  filter:
-    brightness(0) 
-    saturate(100%) 
-    invert(44%) 
-    sepia(0%) 
-    saturate(423%) 
-    hue-rotate(33deg) 
-    brightness(98%) 
-    contrast(96%);
-} */
+.bookmark.active:hover .outer-circle {
+  fill: var(--moderate-cyan);
+}
+
+.outer-circle {
+  transition: .3s ease-in-out;
+  fill: hsl(0, 0%, 18%);
+}
+
+.outer-circle.active {
+  fill: var(--dark-cyan);
+  transition: .3s ease-in-out;
+}
+
+.inner-shape {
+  fill: hsl(0, 0%, 69%);
+}
+
+.inner-shape.active {
+  fill: white;
+}
 
 .content-container {
   display: flex;
@@ -875,12 +878,17 @@ input[type=number] {
     display: flex;
     background-color: var(--light-gray);
     border-radius: 50px;
-    width: 170px;
+    height: fit-content;
+    /* width: 170px; */
   }
 
-  .bookmark p{
+  .bookmark.active {
+    background-color: var(--lighter-cyan);
+  }
+
+  .bookmark p {
     display: block;
-    padding: 0 1.3rem 0 0.9rem;
+    padding: 0 1.6rem 0 0.9rem;
     /* padding: 0; */
     height: fit-content;
     align-self: center;
@@ -890,6 +898,10 @@ input[type=number] {
     /* margin: 0 auto; */
     /* display: none; */
     font-size: 1rem;
+  }
+
+  .bookmark-p.active {
+    color: var(--dark-cyan);
   }
 
   .stats {

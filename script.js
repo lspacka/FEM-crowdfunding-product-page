@@ -158,6 +158,7 @@ open_pledge_modal_buttons.forEach((button, index) => {
         requestAnimationFrame(() => {
             target_section.scrollIntoView({ behavior: "smooth", block: "start" })
 
+            // adds a tiny offset to the top coord
             if (index != 0) {
                 setTimeout(() => {
                     window.scrollBy({ top: -20, behavior: "smooth" });
@@ -217,3 +218,39 @@ pledge_headings.forEach(heading => {
         input.checked = true
     })
 })
+
+// bookmark state change 
+const bookmark = document.querySelector('.bookmark')
+const bookmark_p = document.querySelector('.bookmark-p')
+const outer_circle = document.querySelector('.outer-circle')
+const inner_shape = document.querySelector('.inner-shape')
+let bookmarked = false
+
+bookmark.addEventListener('click', () => {
+    bookmarked = !bookmarked
+
+    if (bookmarked) {
+        // bookmark.style.backgroundColor = 'hsl(192, 29%, 97%)'
+        // bookmark_p.style.color = 'hsl(176, 72%, 28%)'
+        // bookmark_p.textContent = 'Bookmarked'
+        // outer_circle.style.fill = 'hsl(176, 72%, 28%)'
+        // inner_shape.style.fill = 'white'
+        bookmark.classList.add('active')
+        bookmark_p.classList.add('active')
+        bookmark_p.textContent = 'Bookmarked'
+        outer_circle.classList.add('active')
+        inner_shape.classList.add('active')
+    } else {
+        // bookmark.style.backgroundColor = 'hsl(0, 0%, 95%)'
+        // bookmark_p.style.color = 'hsl(0, 0%, 48%)'
+        // bookmark_p.textContent = 'Bookmark'
+        // outer_circle.style.fill = 'hsla(0, 0%, 18%, 1.00)'
+        // inner_shape.style.fill = 'hsla(0, 0%, 69%, 1.00)'
+        bookmark.classList.remove('active')
+        bookmark_p.classList.remove('active')
+        bookmark_p.textContent = 'Bookmark'
+        outer_circle.classList.remove('active')
+        inner_shape.classList.remove('active')
+    }
+})
+
