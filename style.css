@@ -21,11 +21,12 @@
   --border-gray:        hsl(0, 0%, 90%);    
   --lightish-gray:      hsl(0, 0%, 73%);
   --dark-gray:          hsl(0, 0%, 48%);
+  --dark-wat:           hsl(0, 0%, 3%);
+
   --lighter-cyan:       hsl(192, 29%, 97%);
   --light-cyan:         hsl(170, 28%, 76%);
   --moderate-cyan:      hsl(176, 50%, 47%);
   --dark-cyan:          hsl(176, 72%, 28%);
-  --dark-wat:           hsl(0, 0%, 3%);
 }
 
 *,
@@ -177,8 +178,8 @@ button,
 .bookmark,
 .close-modal,
 .close-menu,
-.reward-type,
-.select-pledge,
+.reward-type:not(.reward-type-disabled),
+.select-pledge:not(.select-pledge-disabled),
 button:not(.button-disabled):hover {
   cursor: pointer;
 }
@@ -377,8 +378,8 @@ button:not(.button-disabled):hover {
   transition: .2s ease-in;
 }
 
-.reward-type:hover,
-.reward-type:hover ~ .pledge-minimum {
+.reward-type:not(.reward-type-disabled):hover,
+.reward-type:not(.reward-type-disabled):hover ~ .pledge-minimum {
   color: var(--dark-cyan);
 }
 

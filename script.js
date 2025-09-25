@@ -2,6 +2,7 @@
 //  + modal opening and closing
 //  + have the modal scroll to the pledge position
 //  + clean input after pledging
+//  - change @205 to class toggles
 //  - disable hovering fx on disabled reward
 //  - improve auto-scroll
 //  - refactor
@@ -100,6 +101,12 @@ pledges.forEach((pledge, index) => {
 
                 pledges_modal.style.display = 'none'
                 confirm_modal.style.display = 'block'
+                gsap.fromTo(confirm_modal, { opacity: 0 }, { opacity: 1, ease: "power4.out", duration: 1 })
+                gsap.to(window, {
+                    duration: 1,
+                    scrollTo: {y: confirm_modal, offsetY: 20},
+                    ease: "power4.out"
+                })
                 header_flair.style.zIndex = 0;
             }
         }
@@ -150,20 +157,26 @@ open_pledge_modal_buttons.forEach((button, index) => {
         const target_section = document.getElementById(target_id)
 
         pledges_modal.style.display = 'block'
+        gsap.fromTo(pledges_modal, { opacity: 0, duration: 1 }, { opacity: 1,  ease: "power4.out", duration: 1 })
         overlay.style.display = 'block'
         header_flair.style.zIndex = 0;
         radio_inputs[index].checked = true
         
-        // auto-scrolls to the appropiate reward
-        requestAnimationFrame(() => {
-            target_section.scrollIntoView({ behavior: "smooth", block: "start" })
+        // scrolls to the appropiate reward 
+        // requestAnimationFrame(() => {
+        //     target_section.scrollIntoView({ behavior: "smooth", block: "start" })
 
-            // adds a tiny offset to the top coord
-            if (index != 0) {
-                setTimeout(() => {
-                    window.scrollBy({ top: -20, behavior: "smooth" });
-                }, 300);
-            } 
+        //     // adds a tiny offset to the top coord
+        //     if (index != 0) {
+        //         setTimeout(() => {
+        //             window.scrollBy({ top: -20, behavior: "smooth" });
+        //         }, 300);
+        //     } 
+        // })
+        gsap.to(window, {
+            duration: 1.6,
+            scrollTo: {y: target_section, offsetY: 20},
+            ease: "power4.out"
         })
     })
 })
@@ -188,6 +201,13 @@ no_reward_confirm.addEventListener('click', () => {
 
     pledges_modal.style.display = 'none'
     confirm_modal.style.display = 'block'
+    gsap.fromTo(confirm_modal, { opacity: 0, duration: 2 }, { opacity: 1,  ease: "power4.out", duration: 1 })
+    gsap.to(window, {
+        duration: 1,
+        scrollTo: {y: confirm_modal, offsetY: 20},
+        ease: "power4.out"
+    })
+
     header_flair.style.zIndex = 0;
     input_error.style.display = 'none'
 })
@@ -199,12 +219,40 @@ text_inputs.forEach(input =>
     )
 )
 
+// bookmark state change 
+const bookmark = document.querySelector('.bookmark')
+const bookmark_p = document.querySelector('.bookmark-p')
+const outer_circle = document.querySelector('.outer-circle')
+const inner_shape = document.querySelector('.inner-shape')
+let bookmarked = false
+
+bookmark.addEventListener('selectstart', e => {
+    e.preventDefault()
+})
+
+bookmark.addEventListener('click', () => {
+    bookmarked = !bookmarked
+    bookmark_p.textContent = bookmarked ? 'Bookmarked' : 'Bookmark'
+
+    if (bookmarked) {
+        bookmark.classList.add('active')
+        bookmark_p.classList.add('active')
+        outer_circle.classList.add('active')
+        inner_shape.classList.add('active')
+    } else {
+        bookmark.classList.remove('active')
+        bookmark_p.classList.remove('active')
+        outer_circle.classList.remove('active')
+        inner_shape.classList.remove('active')
+    }
+})
+
 // changes radio input border color when hovering on the neighbor text (.reward-type)
 const pledge_headings = document.querySelectorAll('.pledge-heading')
 
 pledge_headings.forEach(heading => {
     const input = heading.querySelector('.select-pledge')
-    const text = heading.querySelector('.reward-type')
+    const text = heading.querySelector('.reward-type:not(.reward-type-disabled)')
 
     text.addEventListener('mouseover', () => {
         input.style.borderColor = 'hsl(176, 72%, 28%)'
@@ -219,38 +267,27 @@ pledge_headings.forEach(heading => {
     })
 })
 
-// bookmark state change 
-const bookmark = document.querySelector('.bookmark')
-const bookmark_p = document.querySelector('.bookmark-p')
-const outer_circle = document.querySelector('.outer-circle')
-const inner_shape = document.querySelector('.inner-shape')
-let bookmarked = false
+// // bookmark state change 
+// const bookmark = document.querySelector('.bookmark')
+// const bookmark_p = document.querySelector('.bookmark-p')
+// const outer_circle = document.querySelector('.outer-circle')
+// const inner_shape = document.querySelector('.inner-shape')
+// let bookmarked = false
 
-bookmark.addEventListener('click', () => {
-    bookmarked = !bookmarked
+// bookmark.addEventListener('click', () => {
+//     bookmarked = !bookmarked
+//     bookmark_p.textContent = bookmarked ? 'Bookmarked' : 'Bookmark'
 
-    if (bookmarked) {
-        // bookmark.style.backgroundColor = 'hsl(192, 29%, 97%)'
-        // bookmark_p.style.color = 'hsl(176, 72%, 28%)'
-        // bookmark_p.textContent = 'Bookmarked'
-        // outer_circle.style.fill = 'hsl(176, 72%, 28%)'
-        // inner_shape.style.fill = 'white'
-        bookmark.classList.add('active')
-        bookmark_p.classList.add('active')
-        bookmark_p.textContent = 'Bookmarked'
-        outer_circle.classList.add('active')
-        inner_shape.classList.add('active')
-    } else {
-        // bookmark.style.backgroundColor = 'hsl(0, 0%, 95%)'
-        // bookmark_p.style.color = 'hsl(0, 0%, 48%)'
-        // bookmark_p.textContent = 'Bookmark'
-        // outer_circle.style.fill = 'hsla(0, 0%, 18%, 1.00)'
-        // inner_shape.style.fill = 'hsla(0, 0%, 69%, 1.00)'
-        bookmark.classList.remove('active')
-        bookmark_p.classList.remove('active')
-        bookmark_p.textContent = 'Bookmark'
-        outer_circle.classList.remove('active')
-        inner_shape.classList.remove('active')
-    }
-})
+//     if (bookmarked) {
+//         bookmark.classList.add('active')
+//         bookmark_p.classList.add('active')
+//         outer_circle.classList.add('active')
+//         inner_shape.classList.add('active')
+//     } else {
+//         bookmark.classList.remove('active')
+//         bookmark_p.classList.remove('active')
+//         outer_circle.classList.remove('active')
+//         inner_shape.classList.remove('active')
+//     }
+// })
 

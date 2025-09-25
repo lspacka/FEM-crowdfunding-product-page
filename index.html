@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Commissioner:wght@100..900&family=Epilogue:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <!-- <script src="gsap.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
     <script src="script.js" defer></script>
     <title>Frontend Mentor | Crowdfunding product page</title>
   </head>
@@ -138,7 +141,7 @@
               </div>
               <div class="reward reward-disabled" id="reward-3">
                 <div class="reward-heading">
-                  <p class="reward-type">Mahogany Special Edition</p>
+                  <p class="reward-type reward-type-disabled">Mahogany Special Edition</p>
                   <p class="pledge-minimum">Pledge $200 or more</p>
                 </div>
                 <p class="reward-description pgraph">
@@ -160,6 +163,7 @@
         </section>
       </div>
     </main>
+    
     <!-- MODALS -->
      <dialog class="modal modal-completed" open>
       <div class="check-icon">
@@ -316,9 +320,9 @@
           <div class="pledge-header">
             <!-- <input type="radio" class="select-pledge" id="radio-input-1" name="select"> -->
             <div class="pledge-heading">
-              <input type="radio" class="select-pledge" id="radio-input-1" name="select" disabled>
+              <input type="radio" class="select-pledge select-pledge-disabled" id="radio-input-1" name="select" disabled>
               <div class="pledge-heading-text">
-                <p class="reward-type">Mahogany Special Edition</p>
+                <p class="reward-type reward-type-disabled">Mahogany Special Edition</p>
                 <p class="pledge-minimum">Pledge $200 or more</p>
               </div>
             </div>
