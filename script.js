@@ -159,6 +159,8 @@ const header_links = document.querySelector('.links')
 
 function handleViewportChange(event) {
     if (event.matches) {
+        gsap.killTweensOf(header_links)
+        gsap.set(header_links, { clearProps: "all" })
         header_links.classList.remove('visible')
         overlay.style.display = 'none'
         burger_button.style.display = 'none'
@@ -234,17 +236,7 @@ close_confirm_modal.addEventListener('click', () => {
 })
 
 // focus text input regardless of where its container is clicked
-// text_inputs.forEach((input, index) => {
-//     input.addEventListener('click', () => {
-//         input.querySelector('input[type="text"]').focus()
-//         pledge_minimums[index].style.fontWeight = '700'
-//         // console.log(pledge_minimums[index].textContent)
-//         // console.log(pledge_minimums[index])
-//     })
-//     input.addEventListener('blur', () => {
-//         pledge_minimums[index].style.fontWeight = '500'; // or whatever the default is
-//     });
-// })
+// also changes font weight on the text for the minimum pledge
 text_inputs.forEach((wrapper, index) => {
     const txt = wrapper.querySelector('input[type="text"]');
     if (!txt) return;
