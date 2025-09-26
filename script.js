@@ -14,7 +14,8 @@ const confirm_modal = document.querySelector('.modal-completed')
 const back_this_project = document.querySelector('.back-this-project')
 const confirm_buttons = document.querySelectorAll('.confirm-pledge')
 const reward_buttons = document.querySelectorAll('.select-reward')
-const text_inputs = document.querySelectorAll('.pledge-amount')
+const text_inputs = document.querySelectorAll('.pa-active')
+const pledge_minimums = document.querySelectorAll('.modal-pledge-minimum')
 const radio_inputs = document.querySelectorAll('.select-pledge')
 const close_pledges_modal = document.querySelector('.close-modal')
 const close_confirm_modal = document.querySelector('.modal-completed-button')
@@ -142,7 +143,6 @@ pledges.forEach((pledge, index) => {
         })
 
         header_flair.style.zIndex = 0;
-        // input_error.style.display = 'none'
         input_borders.forEach(item => { item.classList.remove('error') })
         input_errors.forEach(item => { item.style.display = 'none' })
         inputs.forEach((item, index2) => {
@@ -181,24 +181,17 @@ burger_button.addEventListener('click', () => {
     close_menu.classList.add('visible')
     burger_button.style.display = 'none'
     overlay.style.display = 'block'
-    // gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 1.5, ease: "power4.out" })
     overlay.style.opacity = 1
     header_flair.style.zIndex = 1
 })
 
 close_menu.addEventListener('click', () => {
-    // header_links.classList.remove('visible')
     gsap.fromTo(header_links, 
         { opacity: 1 },
         { 
             opacity: 0, 
             ease: "power4.out", 
             duration: 1.5,
-            // onComplete: () => {
-            //     header_links.classList.remove('visible')
-            //     // overlay.style.display = 'none'
-            //     // header_links.style.opacity = 1
-            // }
         }
     )
 
@@ -206,10 +199,6 @@ close_menu.addEventListener('click', () => {
     close_menu.classList.remove('visible')
     overlay.style.display = 'none'
 })
-
-// modals logic
-// const no_reward_confirm = document.querySelector('.no-reward-button')
-// const open_pledge_modal_buttons = document.querySelectorAll('.open-pledge-modal')
 
 open_pledge_modal_buttons.forEach((button, index) => {
     button.addEventListener('click', () => {
@@ -238,47 +227,43 @@ open_pledge_modal_buttons.forEach((button, index) => {
 
 close_pledges_modal.addEventListener('click', () => {
     fadeOutModal(pledges_modal, overlay, 1)
-    // overlay.style.display = 'none'
 })
 
 close_confirm_modal.addEventListener('click', () => {
     fadeOutModal(confirm_modal, overlay, 1.3)
-    // confirm_modal.style.display = 'none'
-    // overlay.style.display = 'none'
 })
 
-// no_reward_confirm.addEventListener('click', () => {
-//     const backers_text = total_backers.textContent
-//     const numstr2 = backers_text.replace(/[^0-9.]/g, "")
-
-//     backers_value = parseFloat(numstr2)
-//     backers_value++
-//     total_backers.textContent = backers_value.toLocaleString("en-US")
-
-//     pledges_modal.style.display = 'none'
-//     confirm_modal.style.display = 'block'
-
-//     gsap.fromTo(confirm_modal, 
-//         { opacity: 0, duration: 2 }, 
-//         { opacity: 1,  ease: "power4.out", duration: 1 }
-//     )
-    
-//     gsap.to(window, {
-//         duration: 1,
-//         scrollTo: {y: confirm_modal, offsetY: 20},
-//         ease: "power4.out"
-//     })
-
-//     header_flair.style.zIndex = 0;
-//     input_error.style.display = 'none'
-// })
-
 // focus text input regardless of where its container is clicked
-text_inputs.forEach(input => 
-    input.addEventListener('click', () => 
-        input.querySelector('input[type="text"]').focus()
-    )
-)
+// text_inputs.forEach((input, index) => {
+//     input.addEventListener('click', () => {
+//         input.querySelector('input[type="text"]').focus()
+//         pledge_minimums[index].style.fontWeight = '700'
+//         // console.log(pledge_minimums[index].textContent)
+//         // console.log(pledge_minimums[index])
+//     })
+//     input.addEventListener('blur', () => {
+//         pledge_minimums[index].style.fontWeight = '500'; // or whatever the default is
+//     });
+// })
+text_inputs.forEach((wrapper, index) => {
+    const txt = wrapper.querySelector('input[type="text"]');
+    if (!txt) return;
+
+    // keep wrapper clickable to focus the input
+    wrapper.addEventListener('click', () => txt.focus());
+
+    txt.addEventListener('focus', () => {
+        pledge_minimums[index].style.fontWeight = '700';
+    });
+
+    txt.addEventListener('blur', () => {
+        // remove inline style so CSS default applies
+        pledge_minimums[index].style.fontWeight = '';
+    });
+});
+
+// console.log(text_inputs)
+console.log(pledge_minimums)
 
 // bookmark state change 
 const bookmark = document.querySelector('.bookmark')

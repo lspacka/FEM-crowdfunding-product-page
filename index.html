@@ -58,7 +58,6 @@
               <div class="intro-buttons">
                 <button class="back-this-project open-pledge-modal" id="open-modal-pledge-1">Back this project</button>
                 <div class="bookmark">
-                  <!-- <img src="./images/icon-bookmark.svg" alt="bookmark icon"> -->
                    <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56">
                     <g fill="none" fill-rule="evenodd">
                       <!-- outer circle -->
@@ -105,6 +104,7 @@
                 to allow notepads, pens, and USB sticks to be stored under the stand.
               </p>
             </div>
+            
               <div class="reward" id="reward-1">
                 <div class="reward-heading">
                   <p class="reward-type">Bamboo Stand</p>
@@ -122,6 +122,7 @@
                   <button class="select-reward open-pledge-modal" id="open-modal-pledge-2">Select Reward</button>
                 </div>
               </div>
+
               <div class="reward" id="reward-2">
                 <div class="reward-heading">
                   <p class="reward-type">Black Edition Stand</p>
@@ -139,6 +140,7 @@
                   <button class="select-reward open-pledge-modal" id="open-modal-pledge-3">Select Reward</button>
                 </div>
               </div>
+
               <div class="reward reward-disabled" id="reward-3">
                 <div class="reward-heading">
                   <p class="reward-type reward-type-disabled">Mahogany Special Edition</p>
@@ -151,9 +153,7 @@
                 <div class="reward-bottom">
                   <div class="rewards-left" id="rewards-left-1">
                     <p class="reward-number">0</p>
-                    <!-- <div class="reward-left-div"> -->
                       <p class="reward-left">left</p>
-                    <!-- </div> -->
                   </div>
                   <button class="select-reward button-disabled" id="select-reward-button-1">Out of Stock</button>
                 </div>
@@ -164,6 +164,7 @@
       </div>
     </main>
     
+
     <!-- MODALS -->
      <dialog class="modal modal-completed" open>
       <div class="check-icon">
@@ -187,11 +188,11 @@
       <p class="modal-pledges-heading">
         Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?
       </p>
+
       <!-- PLEDGE WITH NO REWARD -->
       <div class="modal-pledge no-reward" id="modal-pledge-1">
         <div class="pledge-info">
           <div class="pledge-header pledge-header-no-reward">
-            <!-- <input type="radio" class="select-pledge" name="select"> -->
             <div class="pledge-heading">
               <input type="radio" class="select-pledge" name="select">
               <p class="reward-type">Pledge with no reward</p>
@@ -202,9 +203,7 @@
             you will be signed up to receive product updates via email.
           </p>
         </div>
-        <!-- <div class="dividing-line"></div> -->
       </div>
-      <!-- <div class="dividing-line"></div> -->
       <div class="pledge-bottom pb-no-reward">  <!--class="pledge-no-reward"-->
         <p>Enter your pledge</p>
         <div class="enter-pledge enter-pledge-no-reward">
@@ -212,16 +211,16 @@
           <button class="confirm-pledge no-reward-button">Continue</button>
         </div>
       </div>
+
       <!-- BAMBOO STAND -->
       <div class="modal-pledge" id="modal-pledge-2">
         <div class="pledge-info">
           <div class="pledge-header">
-            <!-- <input type="radio" class="select-pledge" id="radio-input-1" name="select"> -->
             <div class="pledge-heading">
               <input type="radio" class="select-pledge" id="radio-input-1" name="select">
               <div class="pledge-heading-text">
                 <p class="reward-type">Bamboo Stand</p>
-                <p class="pledge-minimum">Pledge $25 or more</p>
+                <p class="pledge-minimum modal-pledge-minimum">Pledge $25 or more</p>
               </div>
             </div>
             <div class="rewards-left desktop-rewards-left">
@@ -247,7 +246,7 @@
         <p>Enter your pledge</p>
         <div class="enter-pledge-container">
           <div class="enter-pledge">
-            <div class="pledge-amount">
+            <div class="pledge-amount pa-active">
               <p class="currency-simbol">$</p>
               <input type="text" class="text-input" pattern="\d" placeholder="25" inputmode="numeric">
             </div>    
@@ -256,23 +255,16 @@
           <p class="input-error"></p>
         </div>
       </div>
+
       <!-- BLACK EDITION STAND -->
       <div class="modal-pledge" id="modal-pledge-3">
         <div class="pledge-info">
-          <!-- <div class="pledge-header">
-            <input type="radio" class="select-pledge" id="radio-input-2" name="select">
-            <div class="pledge-heading">
-              <p class="reward-type">Black Edition Stand</p>
-              <p class="pledge-minimum">Pledge $75 or more</p>
-            </div>
-          </div> -->
           <div class="pledge-header">
-            <!-- <input type="radio" class="select-pledge" id="radio-input-1" name="select"> -->
             <div class="pledge-heading">
               <input type="radio" class="select-pledge" id="radio-input-1" name="select">
               <div class="pledge-heading-text">
                 <p class="reward-type">Black Edition Stand</p>
-                <p class="pledge-minimum">Pledge $75 or more</p>
+                <p class="pledge-minimum modal-pledge-minimum">Pledge $75 or more</p>
               </div>
             </div>
             <div class="rewards-left desktop-rewards-left">
@@ -298,7 +290,7 @@
         <p>Enter your pledge</p>
         <div class="enter-pledge-container">
           <div class="enter-pledge">
-            <div class="pledge-amount">
+            <div class="pledge-amount pa-active">
               <p class="currency-simbol">$</p>
               <input type="text" class="text-input" pattern="\d" placeholder="75">
             </div>
@@ -307,18 +299,11 @@
           <p class="input-error"></p>
         </div>
       </div>
+
       <!-- MAHOGANY SPECIAL EDITION -->
       <div class="modal-pledge modal-pledge-disabled">
         <div class="pledge-info">
-          <!-- <div class="pledge-header">
-            <input type="radio" class="select-pledge" disabled>
-            <div class="pledge-heading">
-              <p class="reward-type">Mahogany Special Edition</p>
-              <p class="pledge-minimum">Pledge $200 or more</p>
-            </div>
-          </div> -->
           <div class="pledge-header">
-            <!-- <input type="radio" class="select-pledge" id="radio-input-1" name="select"> -->
             <div class="pledge-heading">
               <input type="radio" class="select-pledge select-pledge-disabled" id="radio-input-1" name="select" disabled>
               <div class="pledge-heading-text">
@@ -345,101 +330,7 @@
           </div>
         </div>
       </div>
-      <!-- <div class="pledge-bottom">
-        <p>Enter your pledge</p>
-        <div class="enter-pledge">
-          <input type="text" class="pledge-amount" min="200">
-          <button class="confirm-pledge">Continue</button>
-        </div>
-      </div> -->
      </dialog>
      <div class="overlay"></div>
   </body>
 </html>
-
-<!-- About
-  Discover
-  Get Started
-
-  Mastercraft Bamboo Monitor Riser
-  A beautiful & handcrafted monitor stand to reduce neck and eye strain.
-
-  Back this project
-  Bookmark
-
-  $89,914 of $100,000 backed
-  5,007 total backers
-  56 days left
-
-  About this project
-
-  The Mastercraft Bamboo Monitor Riser is a sturdy and stylish platform that elevates your screen 
-  to a more comfortable viewing height. Placing your monitor at eye level has the potential to improve 
-  your posture and make you more comfortable while at work, helping you stay focused on the task at hand.
-
-  Featuring artisan craftsmanship, the simplicity of design creates extra desk space below your computer 
-  to allow notepads, pens, and USB sticks to be stored under the stand.
-  
-  Bamboo Stand
-  Pledge $25 or more
-  You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and 
-  you’ll be added to a special Backer member list.
-  101 left
-  Select Reward
-
-  Black Edition Stand
-  Pledge $75 or more
-  You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer 
-  member list. Shipping is included.
-  64 left
-  Select Reward
-
-  Mahogany Special Edition
-  Pledge $200 or more
-  You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added 
-  to our Backer member list. Shipping is included.
-  0 left
-  Out of Stock
-
-  Back this project
-  Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?
-
-  Pledge with no reward
-  Choose to support us without a reward if you simply believe in our project. As a backer, 
-  you will be signed up to receive product updates via email.
-
-  Bamboo Stand
-  Pledge $25 or more
-  You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and
-  you’ll be added to a special Backer member list.
-  101 left
-
-  Enter your pledge
-  $25
-  Continue
-
-  Black Edition Stand
-  Pledge $75 or more
-  You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer
-  member list. Shipping is included.
-  64 left
-
-  Enter your pledge
-  $75
-  Continue
-
-  Mahogany Special Edition
-  Pledge $200 or more
-  You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added
-  to our Backer member list. Shipping is included.
-  0 left
-
-  Enter your pledge
-  $200
-  Continue
-
-  Thanks for your support!
-  Your pledge brings us one step closer to sharing Mastercraft Bamboo Monitor Riser worldwide. You will get
-  an email once our campaign is completed.
-  Got it!
- -->
