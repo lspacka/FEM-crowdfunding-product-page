@@ -2,9 +2,8 @@
 //  + modal opening and closing
 //  + have the modal scroll to the pledge position
 //  + clean input after pledging
-//  - change @205 to class toggles
-//  - disable hovering fx on disabled reward
-//  - improve auto-scroll
+//  + disable hovering fx on disabled reward
+//  + improve auto-scroll
 //  - refactor
 
 const overlay = document.querySelector('.overlay')
@@ -20,6 +19,8 @@ const radio_inputs = document.querySelectorAll('.select-pledge')
 const close_pledges_modal = document.querySelector('.close-modal')
 const close_confirm_modal = document.querySelector('.modal-completed-button')
 const media_query = window.matchMedia('(min-width: 800px)')
+const no_reward_confirm = document.querySelector('.no-reward-button')
+const open_pledge_modal_buttons = document.querySelectorAll('.open-pledge-modal')
 
 // get modal_pledge width
 const modal_pledge = document.querySelector('.modal-pledge')
@@ -101,15 +102,53 @@ pledges.forEach((pledge, index) => {
 
                 pledges_modal.style.display = 'none'
                 confirm_modal.style.display = 'block'
-                gsap.fromTo(confirm_modal, { opacity: 0 }, { opacity: 1, ease: "power4.out", duration: 1 })
+
+                gsap.fromTo(confirm_modal, 
+                    { opacity: 0 }, 
+                    { opacity: 1, ease: "power4.out", duration: 1 }
+                )
+
                 gsap.to(window, {
                     duration: 1,
                     scrollTo: {y: confirm_modal, offsetY: 20},
                     ease: "power4.out"
                 })
+
                 header_flair.style.zIndex = 0;
             }
         }
+    })
+
+    no_reward_confirm.addEventListener('click', () => {
+        const backers_text = total_backers.textContent
+        const numstr2 = backers_text.replace(/[^0-9.]/g, "")
+
+        backers_value = parseFloat(numstr2)
+        backers_value++
+        total_backers.textContent = backers_value.toLocaleString("en-US")
+
+        pledges_modal.style.display = 'none'
+        confirm_modal.style.display = 'block'
+
+        gsap.fromTo(confirm_modal, 
+            { opacity: 0, duration: 2 }, 
+            { opacity: 1,  ease: "power4.out", duration: 1 }
+        )
+        
+        gsap.to(window, {
+            duration: 1,
+            scrollTo: { y: confirm_modal, offsetY: 20 },
+            ease: "power4.out"
+        })
+
+        header_flair.style.zIndex = 0;
+        // input_error.style.display = 'none'
+        input_borders.forEach(item => { item.classList.remove('error') })
+        input_errors.forEach(item => { item.style.display = 'none' })
+        inputs.forEach((item, index2) => {
+            item.value = ''
+            item.placeholder = minimums[index2]
+        })
     })
 })
 
@@ -134,22 +173,43 @@ handleViewportChange(media_query)
 
 burger_button.addEventListener('click', () => {
     header_links.classList.add('visible')
+    gsap.fromTo(header_links, 
+        { opacity: 0 },
+        { opacity: 1, ease: "power4.out", duration: 2 }
+    )
+
     close_menu.classList.add('visible')
     burger_button.style.display = 'none'
     overlay.style.display = 'block'
+    // gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 1.5, ease: "power4.out" })
+    overlay.style.opacity = 1
     header_flair.style.zIndex = 1
 })
 
 close_menu.addEventListener('click', () => {
-    header_links.classList.remove('visible')
+    // header_links.classList.remove('visible')
+    gsap.fromTo(header_links, 
+        { opacity: 1 },
+        { 
+            opacity: 0, 
+            ease: "power4.out", 
+            duration: 1.5,
+            // onComplete: () => {
+            //     header_links.classList.remove('visible')
+            //     // overlay.style.display = 'none'
+            //     // header_links.style.opacity = 1
+            // }
+        }
+    )
+
     burger_button.style.display = 'block'
     close_menu.classList.remove('visible')
     overlay.style.display = 'none'
 })
 
 // modals logic
-const no_reward_confirm = document.querySelector('.no-reward-button')
-const open_pledge_modal_buttons = document.querySelectorAll('.open-pledge-modal')
+// const no_reward_confirm = document.querySelector('.no-reward-button')
+// const open_pledge_modal_buttons = document.querySelectorAll('.open-pledge-modal')
 
 open_pledge_modal_buttons.forEach((button, index) => {
     button.addEventListener('click', () => {
@@ -157,22 +217,17 @@ open_pledge_modal_buttons.forEach((button, index) => {
         const target_section = document.getElementById(target_id)
 
         pledges_modal.style.display = 'block'
-        gsap.fromTo(pledges_modal, { opacity: 0, duration: 1 }, { opacity: 1,  ease: "power4.out", duration: 1 })
         overlay.style.display = 'block'
+        overlay.style.opacity = 1
         header_flair.style.zIndex = 0;
         radio_inputs[index].checked = true
-        
-        // scrolls to the appropiate reward 
-        // requestAnimationFrame(() => {
-        //     target_section.scrollIntoView({ behavior: "smooth", block: "start" })
 
-        //     // adds a tiny offset to the top coord
-        //     if (index != 0) {
-        //         setTimeout(() => {
-        //             window.scrollBy({ top: -20, behavior: "smooth" });
-        //         }, 300);
-        //     } 
-        // })
+        gsap.fromTo(pledges_modal, 
+            { opacity: 0, duration: 1 }, 
+            { opacity: 1,  ease: "power4.out", duration: 1 }
+        )
+
+        // scrolls to the appropiate reward 
         gsap.to(window, {
             duration: 1.6,
             scrollTo: {y: target_section, offsetY: 20},
@@ -182,35 +237,41 @@ open_pledge_modal_buttons.forEach((button, index) => {
 })
 
 close_pledges_modal.addEventListener('click', () => {
-    pledges_modal.style.display = 'none'
-    overlay.style.display = 'none'
+    fadeOutModal(pledges_modal, overlay, 1)
+    // overlay.style.display = 'none'
 })
 
 close_confirm_modal.addEventListener('click', () => {
-    confirm_modal.style.display = 'none'
-    overlay.style.display = 'none'
+    fadeOutModal(confirm_modal, overlay, 1.3)
+    // confirm_modal.style.display = 'none'
+    // overlay.style.display = 'none'
 })
 
-no_reward_confirm.addEventListener('click', () => {
-    const backers_text = total_backers.textContent
-    const numstr2 = backers_text.replace(/[^0-9.]/g, "")
+// no_reward_confirm.addEventListener('click', () => {
+//     const backers_text = total_backers.textContent
+//     const numstr2 = backers_text.replace(/[^0-9.]/g, "")
 
-    backers_value = parseFloat(numstr2)
-    backers_value++
-    total_backers.textContent = backers_value.toLocaleString("en-US")
+//     backers_value = parseFloat(numstr2)
+//     backers_value++
+//     total_backers.textContent = backers_value.toLocaleString("en-US")
 
-    pledges_modal.style.display = 'none'
-    confirm_modal.style.display = 'block'
-    gsap.fromTo(confirm_modal, { opacity: 0, duration: 2 }, { opacity: 1,  ease: "power4.out", duration: 1 })
-    gsap.to(window, {
-        duration: 1,
-        scrollTo: {y: confirm_modal, offsetY: 20},
-        ease: "power4.out"
-    })
+//     pledges_modal.style.display = 'none'
+//     confirm_modal.style.display = 'block'
 
-    header_flair.style.zIndex = 0;
-    input_error.style.display = 'none'
-})
+//     gsap.fromTo(confirm_modal, 
+//         { opacity: 0, duration: 2 }, 
+//         { opacity: 1,  ease: "power4.out", duration: 1 }
+//     )
+    
+//     gsap.to(window, {
+//         duration: 1,
+//         scrollTo: {y: confirm_modal, offsetY: 20},
+//         ease: "power4.out"
+//     })
+
+//     header_flair.style.zIndex = 0;
+//     input_error.style.display = 'none'
+// })
 
 // focus text input regardless of where its container is clicked
 text_inputs.forEach(input => 
@@ -255,7 +316,7 @@ pledge_headings.forEach(heading => {
     const text = heading.querySelector('.reward-type:not(.reward-type-disabled)')
 
     text.addEventListener('mouseover', () => {
-        input.style.borderColor = 'hsl(176, 72%, 28%)'
+        input.style.borderColor = 'hsl(176, 50%, 47%)'
     })
 
     text.addEventListener('mouseout', () => {
@@ -267,27 +328,18 @@ pledge_headings.forEach(heading => {
     })
 })
 
-// // bookmark state change 
-// const bookmark = document.querySelector('.bookmark')
-// const bookmark_p = document.querySelector('.bookmark-p')
-// const outer_circle = document.querySelector('.outer-circle')
-// const inner_shape = document.querySelector('.inner-shape')
-// let bookmarked = false
-
-// bookmark.addEventListener('click', () => {
-//     bookmarked = !bookmarked
-//     bookmark_p.textContent = bookmarked ? 'Bookmarked' : 'Bookmark'
-
-//     if (bookmarked) {
-//         bookmark.classList.add('active')
-//         bookmark_p.classList.add('active')
-//         outer_circle.classList.add('active')
-//         inner_shape.classList.add('active')
-//     } else {
-//         bookmark.classList.remove('active')
-//         bookmark_p.classList.remove('active')
-//         outer_circle.classList.remove('active')
-//         inner_shape.classList.remove('active')
-//     }
-// })
-
+// fade-out animation for modal and overlay
+function fadeOutModal(modal, overlay, duration) {
+    gsap.fromTo([modal, overlay], 
+        { opacity: 1},
+        { 
+            opacity: 0, 
+            duration: duration, 
+            ease: 'power4.out', 
+            onComplete: () => {
+                modal.style.display = 'none'
+                overlay.style.display = 'none'
+            }
+        }
+    )
+}

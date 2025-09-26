@@ -1,23 +1,14 @@
 /* 
   TODO: 
     - fine-tune font sizes
-    - align .links width with that of .content
-    - overlay gradient
-    - fix input error top padding
-    - add hover to close modal svg
-    - modals animations
+    - burger menu animation
+    + confirm modal closing animation
+    + fix bookmark circle
 */
 
-/* @supports(-webkit-appearance: none) or (-moz-appearance: none) {
-  input[type='radio'] {
-    appearance: none;
-  }
-} */
-
 :root {
-  --button-height:      3.125rem;
   --lighter-gray:       hsl(0, 0%, 98%);
-  --light-gray:         hsl(0, 0%, 95%);        /* disabled border*/
+  --light-gray:         hsl(0, 0%, 95%);        /* disabled border */
   --border-gray:        hsl(0, 0%, 90%);    
   --lightish-gray:      hsl(0, 0%, 73%);
   --dark-gray:          hsl(0, 0%, 48%);
@@ -27,6 +18,8 @@
   --light-cyan:         hsl(170, 28%, 76%);
   --moderate-cyan:      hsl(176, 50%, 47%);
   --dark-cyan:          hsl(176, 72%, 28%);
+
+  --button-height:      3.125rem;
 }
 
 *,
@@ -375,19 +368,21 @@ button:not(.button-disabled):hover {
   padding-bottom: 0.1rem;
   font-weight: 700;
   color: black;
-  transition: .2s ease-in;
+  transition: .3s ease-in;
+  height: fit-content;
 }
 
 .reward-type:not(.reward-type-disabled):hover,
 .reward-type:not(.reward-type-disabled):hover ~ .pledge-minimum {
-  color: var(--dark-cyan);
+  color: var(--moderate-cyan);
+  font-weight: 700;
 }
 
 .pledge-minimum {
   color: var(--moderate-cyan);
-  font-weight: 700;
+  font-weight: 500;
   padding-bottom: 1.2rem;
-  transition: .2s ease-in;
+  transition: .3s ease-in;
 }
 
 .reward-description {
@@ -646,7 +641,7 @@ button:not(.button-disabled):hover {
   border-radius: 50%;
   background-clip: content-box;
   padding: 5px;
-  transition: .2s ease-in;
+  transition: .3s ease-in;
   align-self: center;
 }
 
@@ -765,8 +760,9 @@ button:not(.button-disabled):hover {
 
 .input-error {
   color: rgb(188, 32, 32);
-  transition: .3s ease-in;
+  transition: .25s ease-in;
   font-size: .7rem;
+  margin-top: .5em;
   /* width: fit-content; */
   /* justify-self: flex-end; */
   /* font-size: .1rem; */

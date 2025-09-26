@@ -13,8 +13,6 @@ Users should be able to:
 - See the number of total backers increment by one after confirming a pledge
 - Toggle whether or not the product is bookmarked
 
-### Screenshot
-
 ![](./screenshot.jpg)
 
 ### Links
@@ -24,9 +22,10 @@ Users should be able to:
 
 ### Built with
 
-- Semantic HTML5 markup
+- HTML5
 - CSS
 - JavaScript
+- GSAP
 
 ## Author
 
