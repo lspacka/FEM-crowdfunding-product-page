@@ -17,7 +17,7 @@ Users should be able to:
 
 ### Links
 
--  [Solution](https://your-solution-url.com)
+-  [Solution](https://www.frontendmentor.io/solutions/crowdfunding-product-page-JkPipzF5y-)
 -  [Live Site](https://lspacka.github.io/FEM-crowdfunding-product-page/)
 
 ### Built with

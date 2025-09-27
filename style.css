@@ -2,7 +2,8 @@
   TODO: 
     + fine-tune font sizes
     - refactor animations
-    - fix burger bug
+    - fix hero background
+    + fix burger bug
     + burger menu animation
     + confirm modal closing animation
     + fix bookmark circle
@@ -88,7 +89,8 @@ button,
 }
 
 .hero {
-  background: url(./images/image-hero-mobile.jpg);
+  background-image: 
+    linear-gradient(hsla(0, 0%, 0%, 0.3), hsla(0, 0%, 0%, 0)), url(./images/image-hero-mobile.jpg);
   background-size: contain;
   background-repeat: round;
   aspect-ratio: 8 / 7;
@@ -644,10 +646,14 @@ input[type=number] {
 
 @media (min-width: 800px) {
   .hero {
-    background: url(./images/image-hero-desktop.jpg);
-    background-repeat: round;
+    background-image: linear-gradient(hsla(0, 0%, 0%, 0.3), hsla(0, 0%, 0%, 0)), url(./images/image-hero-desktop.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* aspect-ratio: unset;
+    height: 25vh; */
     aspect-ratio: unset;
-    height: 25vh;
+    background-position: center;
+    height: 60vh;
   }
 
   header {
@@ -829,15 +835,14 @@ input[type=number] {
 }
 
 @media (min-width: 850px) {
-  .hero {
-    background: url(./images/image-hero-desktop.jpg);
-    background-repeat: round;
+  /* .hero {
+    background-image: linear-gradient(hsla(0, 0%, 0%, 0.3), hsla(0, 0%, 0%, 0)), url(./images/image-hero-desktop.jpg);
     background-position: center;
     height: 60vh;
-  }
+  } */
 
   header {
-    padding: 2.7rem 11rem 0;
+    padding: 3.5rem 7.5rem 0;
   }
 
   .header-svg img {

@@ -4,6 +4,9 @@
 //  + clean input after pledging
 //  + disable hovering fx on disabled reward
 //  + improve auto-scroll
+//  - clear inputs with .close_pledges_modal
+//  - put input clearing code into functions
+//  - put fade in animations into function
 //  - refactor
 
 const overlay = document.querySelector('.overlay')
@@ -120,35 +123,66 @@ pledges.forEach((pledge, index) => {
         }
     })
 
-    no_reward_confirm.addEventListener('click', () => {
-        const backers_text = total_backers.textContent
-        const numstr2 = backers_text.replace(/[^0-9.]/g, "")
+    // no_reward_confirm.addEventListener('click', () => {
+    //     const backers_text = total_backers.textContent
+    //     const numstr2 = backers_text.replace(/[^0-9.]/g, "")
 
-        backers_value = parseFloat(numstr2)
-        backers_value++
-        total_backers.textContent = backers_value.toLocaleString("en-US")
+    //     backers_value = parseFloat(numstr2)
+    //     backers_value++
+    //     total_backers.textContent = backers_value.toLocaleString("en-US")
 
-        pledges_modal.style.display = 'none'
-        confirm_modal.style.display = 'block'
+    //     pledges_modal.style.display = 'none'
+    //     confirm_modal.style.display = 'block'
 
-        gsap.fromTo(confirm_modal, 
-            { opacity: 0, duration: 2 }, 
-            { opacity: 1,  ease: "power4.out", duration: 1 }
-        )
+    //     gsap.fromTo(confirm_modal, 
+    //         { opacity: 0, duration: 2 }, 
+    //         { opacity: 1,  ease: "power4.out", duration: 1 }
+    //     )
         
-        gsap.to(window, {
-            duration: 1,
-            scrollTo: { y: confirm_modal, offsetY: 20 },
-            ease: "power4.out"
-        })
+    //     gsap.to(window, {
+    //         duration: 1,
+    //         scrollTo: { y: confirm_modal, offsetY: 20 },
+    //         ease: "power4.out"
+    //     })
 
-        header_flair.style.zIndex = 0;
-        input_borders.forEach(item => { item.classList.remove('error') })
-        input_errors.forEach(item => { item.style.display = 'none' })
-        inputs.forEach((item, index2) => {
-            item.value = ''
-            item.placeholder = minimums[index2]
-        })
+    //     header_flair.style.zIndex = 0;
+    //     input_borders.forEach(item => { item.classList.remove('error') })
+    //     input_errors.forEach(item => { item.style.display = 'none' })
+    //     inputs.forEach((item, index2) => {
+    //         item.value = ''
+    //         item.placeholder = minimums[index2]
+    //     })
+    // })
+})
+
+no_reward_confirm.addEventListener('click', () => {
+    const backers_text = total_backers.textContent
+    const numstr2 = backers_text.replace(/[^0-9.]/g, "")
+
+    backers_value = parseFloat(numstr2)
+    backers_value++
+    total_backers.textContent = backers_value.toLocaleString("en-US")
+
+    pledges_modal.style.display = 'none'
+    confirm_modal.style.display = 'block'
+
+    gsap.fromTo(confirm_modal, 
+        { opacity: 0, duration: 2 }, 
+        { opacity: 1,  ease: "power4.out", duration: 1 }
+    )
+    
+    gsap.to(window, {
+        duration: 1,
+        scrollTo: { y: confirm_modal, offsetY: 20 },
+        ease: "power4.out"
+    })
+
+    header_flair.style.zIndex = 0;
+    input_borders.forEach(item => { item.classList.remove('error') })
+    input_errors.forEach(item => { item.style.display = 'none' })
+    inputs.forEach((item, index2) => {
+        item.value = ''
+        item.placeholder = minimums[index2]
     })
 })
 
@@ -229,6 +263,7 @@ open_pledge_modal_buttons.forEach((button, index) => {
 
 close_pledges_modal.addEventListener('click', () => {
     fadeOutModal(pledges_modal, overlay, 1)
+    // clear inputs
 })
 
 close_confirm_modal.addEventListener('click', () => {
@@ -239,9 +274,9 @@ close_confirm_modal.addEventListener('click', () => {
 // also changes font weight on the text for the minimum pledge
 text_inputs.forEach((wrapper, index) => {
     const txt = wrapper.querySelector('input[type="text"]');
-    if (!txt) return;
+    if (!txt) 
+        return;
 
-    // keep wrapper clickable to focus the input
     wrapper.addEventListener('click', () => txt.focus());
 
     txt.addEventListener('focus', () => {
