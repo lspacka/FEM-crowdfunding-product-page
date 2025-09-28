@@ -1,14 +1,15 @@
 // TODO:
 //  + modal opening and closing
 //  + have the modal scroll to the pledge position
-//  + clean input after pledging
+//  + clean inputs after pledging
 //  + disable hovering fx on disabled reward
 //  + improve auto-scroll
-//  - clear inputs with .close_pledges_modal
-//  - put input clearing code into functions
-//  - put fade in animations into function
+//  + clear inputs with .close_pledges_modal
+//  + put input clearing code into functions
+//  + put fade in animations into function
 //  - refactor
 
+const body = document.querySelector('body')
 const overlay = document.querySelector('.overlay')
 const header = document.querySelector('header')
 const header_flair = document.querySelector('.header-flair')
@@ -40,11 +41,19 @@ const progress_bar = document.querySelector('.progress-bar')
 const total_collected = document.querySelector('.total-collected')
 const goal_value = 100000
 const minimums = [25, 75]
+
 // these are for clearing all inputs and error messages after confirming the pledge:
 const inputs = document.querySelectorAll('.text-input')
 const input_borders = document.querySelectorAll('.pledge-amount')
 const input_errors = document.querySelectorAll('.input-error')
 console.log('inputs: ', inputs.length)
+
+
+overlay.addEventListener('click', () => {
+    if (media_query.matches) {
+        closePledgesModal()
+    }
+})
 
 pledges.forEach((pledge, index) => {
     const input = pledge.querySelector('input')
@@ -96,63 +105,18 @@ pledges.forEach((pledge, index) => {
                 reward_quantity.textContent = reward_value
                 reward_number.textContent = reward_value
 
-                // clear all inputs and error states:
-                input_borders.forEach(item => { item.classList.remove('error') })
-                input_errors.forEach(item => { item.style.display = 'none' })
-                inputs.forEach((item, index2) => {
-                    item.value = ''
-                    item.placeholder = minimums[index2]
-                })
+                clearInputs()
 
                 pledges_modal.style.display = 'none'
                 confirm_modal.style.display = 'block'
 
-                gsap.fromTo(confirm_modal, 
-                    { opacity: 0 }, 
-                    { opacity: 1, ease: "power4.out", duration: 1 }
-                )
-
-                gsap.to(window, {
-                    duration: 1,
-                    scrollTo: {y: confirm_modal, offsetY: 20},
-                    ease: "power4.out"
-                })
+                fadeInModal(confirm_modal, 1)
+                ScrollTo(confirm_modal, 1)
 
                 header_flair.style.zIndex = 0;
             }
         }
     })
-
-    // no_reward_confirm.addEventListener('click', () => {
-    //     const backers_text = total_backers.textContent
-    //     const numstr2 = backers_text.replace(/[^0-9.]/g, "")
-
-    //     backers_value = parseFloat(numstr2)
-    //     backers_value++
-    //     total_backers.textContent = backers_value.toLocaleString("en-US")
-
-    //     pledges_modal.style.display = 'none'
-    //     confirm_modal.style.display = 'block'
-
-    //     gsap.fromTo(confirm_modal, 
-    //         { opacity: 0, duration: 2 }, 
-    //         { opacity: 1,  ease: "power4.out", duration: 1 }
-    //     )
-        
-    //     gsap.to(window, {
-    //         duration: 1,
-    //         scrollTo: { y: confirm_modal, offsetY: 20 },
-    //         ease: "power4.out"
-    //     })
-
-    //     header_flair.style.zIndex = 0;
-    //     input_borders.forEach(item => { item.classList.remove('error') })
-    //     input_errors.forEach(item => { item.style.display = 'none' })
-    //     inputs.forEach((item, index2) => {
-    //         item.value = ''
-    //         item.placeholder = minimums[index2]
-    //     })
-    // })
 })
 
 no_reward_confirm.addEventListener('click', () => {
@@ -166,24 +130,12 @@ no_reward_confirm.addEventListener('click', () => {
     pledges_modal.style.display = 'none'
     confirm_modal.style.display = 'block'
 
-    gsap.fromTo(confirm_modal, 
-        { opacity: 0, duration: 2 }, 
-        { opacity: 1,  ease: "power4.out", duration: 1 }
-    )
-    
-    gsap.to(window, {
-        duration: 1,
-        scrollTo: { y: confirm_modal, offsetY: 20 },
-        ease: "power4.out"
-    })
+    fadeInModal(confirm_modal, 1)
+    ScrollTo(confirm_modal, 1)
 
     header_flair.style.zIndex = 0;
-    input_borders.forEach(item => { item.classList.remove('error') })
-    input_errors.forEach(item => { item.style.display = 'none' })
-    inputs.forEach((item, index2) => {
-        item.value = ''
-        item.placeholder = minimums[index2]
-    })
+
+    clearInputs()
 })
 
 // burger menu logic
@@ -209,10 +161,7 @@ handleViewportChange(media_query)
 
 burger_button.addEventListener('click', () => {
     header_links.classList.add('visible')
-    gsap.fromTo(header_links, 
-        { opacity: 0 },
-        { opacity: 1, ease: "power4.out", duration: 2 }
-    )
+    fadeInModal(header_links, 2)
 
     close_menu.classList.add('visible')
     burger_button.style.display = 'none'
@@ -238,7 +187,7 @@ close_menu.addEventListener('click', () => {
 
 open_pledge_modal_buttons.forEach((button, index) => {
     button.addEventListener('click', () => {
-        const target_id = button.id.replace("open-", "")
+        const target_id = button.id.replace("open-", "") 
         const target_section = document.getElementById(target_id)
 
         pledges_modal.style.display = 'block'
@@ -247,30 +196,21 @@ open_pledge_modal_buttons.forEach((button, index) => {
         header_flair.style.zIndex = 0;
         radio_inputs[index].checked = true
 
-        gsap.fromTo(pledges_modal, 
-            { opacity: 0, duration: 1 }, 
-            { opacity: 1,  ease: "power4.out", duration: 1 }
-        )
-
-        // scrolls to the appropiate reward 
-        gsap.to(window, {
-            duration: 1.6,
-            scrollTo: {y: target_section, offsetY: 20},
-            ease: "power4.out"
-        })
+        fadeInModal(pledges_modal, 1)
+        ScrollTo(target_section, 1.6)
     })
 })
 
 close_pledges_modal.addEventListener('click', () => {
-    fadeOutModal(pledges_modal, overlay, 1)
-    // clear inputs
+    fadeOutModal(pledges_modal, 1)
+    clearInputs()
 })
 
 close_confirm_modal.addEventListener('click', () => {
-    fadeOutModal(confirm_modal, overlay, 1.3)
+    fadeOutModal(confirm_modal, 1.3)
 })
 
-// focus text input regardless of where its container is clicked
+// focuses text input regardless of where its container is clicked
 // also changes font weight on the text for the minimum pledge
 text_inputs.forEach((wrapper, index) => {
     const txt = wrapper.querySelector('input[type="text"]');
@@ -288,9 +228,6 @@ text_inputs.forEach((wrapper, index) => {
         pledge_minimums[index].style.fontWeight = '';
     });
 });
-
-// console.log(text_inputs)
-console.log(pledge_minimums)
 
 // bookmark state change 
 const bookmark = document.querySelector('.bookmark')
@@ -340,8 +277,34 @@ pledge_headings.forEach(heading => {
     })
 })
 
-// fade-out animation for modal and overlay
-function fadeOutModal(modal, overlay, duration) {
+////////////////////////////////////////////////////////
+
+// closes the pledges modal when clicking outside of it
+function closePledgesModal() {
+    fadeOutModal(pledges_modal, 1)
+    clearInputs()
+}
+
+// clears all inputs and error states
+function clearInputs() {
+    input_borders.forEach(item => { item.classList.remove('error') })
+    input_errors.forEach(item => { item.style.display = 'none' })
+    inputs.forEach((item, index) => {
+        item.value = ''
+        item.placeholder = minimums[index]
+    })
+}
+
+// fade-in animation for modals
+function fadeInModal(modal, duration) {
+    gsap.fromTo(modal, 
+        { opacity: 0 }, 
+        { opacity: 1, ease: "power4.out", duration: duration }
+    )
+}
+
+// fade-out animation for modals and overlay
+function fadeOutModal(modal, duration) {
     gsap.fromTo([modal, overlay], 
         { opacity: 1},
         { 
@@ -354,4 +317,13 @@ function fadeOutModal(modal, overlay, duration) {
             }
         }
     )
+}
+
+// auto-scrolls to target
+function ScrollTo(target, duration) {
+    gsap.to(window, {
+        duration: duration,
+        scrollTo: {y: target, offsetY: 20},
+        ease: "power4.out"
+    })
 }
